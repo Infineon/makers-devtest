@@ -53,7 +53,10 @@ run-project-setup-script: pull-container
 
 run-project-workflow: pull-container
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --getBuildJobs
-
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --runBuildJob build-wire-XMC4700
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --runBuildJob check-clang-tidy-wire
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --runBuildJob check-cppcheck-wire
+	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 ##############################################################################################################################################################
 
