@@ -24,10 +24,13 @@ jobs:
 
 
     container:
-      image: ghcr.io/infineon/makers-docker:latest
+      image: docker.io/ifxmakers/makers-docker:latest
+      # image: ghcr.io/infineon/makers-docker:latest
       credentials:
-        username: infineon
-        password: ${{ secrets.github_token }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        # username: infineon
+        # password: ${{ secrets.github_token }}
       volumes:
         - .:/myLocalWorkingDir:rw
       options: --cpus 1
@@ -55,10 +58,13 @@ jobs:
     needs: setup
 
     container:
-      image: ghcr.io/infineon/makers-docker:latest
+      image: docker.io/ifxmakers/makers-docker:latest
+      # image: ghcr.io/infineon/makers-docker:latest
       credentials:
-        username: infineon
-        password: ${{ secrets.github_token }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        # username: infineon
+        # password: ${{ secrets.github_token }}
       volumes:
         - .:/myLocalWorkingDir:rw
       options: --cpus 1
