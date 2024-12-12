@@ -17,22 +17,19 @@ jobs:
     runs-on: ubuntu-24.04
 
 
-    env:
-      GHCR_REGISTRY: ghcr.io
-      # issue : organization "Infineon" with capital "I" not allowed.
-      IMAGE_NAME: infineon/makers-docker
+    # env:
+    #   GHCR_REGISTRY: ghcr.io
+    #   # issue : organization "Infineon" with capital "I" not allowed.
+    #   IMAGE_NAME: infineon/makers-docker
 
 
     container:
       image: ghcr.io/infineon/makers-docker:latest
-
       credentials:
         username: infineon
         password: ${{ secrets.github_token }}
-
       volumes:
         - .:/myLocalWorkingDir:rw
-
       options: --cpus 1
 
     steps:
@@ -44,7 +41,7 @@ jobs:
       - name: Set strategy matrix
         id: set-matrix
         run: |
-          eval $(python3 bin/build.py --getBuildJobs)
+          eval $(python3 exampleFlow/bin/build.py --getBuildJobs)
 
 
     outputs:
@@ -59,14 +56,11 @@ jobs:
 
     container:
       image: ghcr.io/infineon/makers-docker:latest
-
       credentials:
         username: infineon
         password: ${{ secrets.github_token }}
-
       volumes:
         - .:/myLocalWorkingDir:rw
-
       options: --cpus 1
 
 
@@ -89,4 +83,4 @@ jobs:
         echo "matrix.build_jobs   : " ${{ matrix.build_jobs }}
         echo ""
 
-        bin/build.sh --runBuildJob ${{ matrix.build_jobs }}
+        exampleFlow/bin/build.sh --runBuildJob ${{ matrix.build_jobs }}
