@@ -5,6 +5,7 @@
 
 FQBN   ?=
 TARGET ?=
+UNITY_PATH ?=
 
 
 # clean-all:
