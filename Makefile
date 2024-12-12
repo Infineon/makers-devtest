@@ -22,7 +22,7 @@ TARGET ?=
 ##############################################################################################################################################################
 
 run-build-target:
-	ls -l
+	exampleFlow/bin/workaround.sh $(FQBN) Unity $(TARGET)
 # (cd tests/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET))
 
 
