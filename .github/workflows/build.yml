@@ -18,8 +18,8 @@ jobs:
     #   IMAGE_NAME: infineon/makers-docker
 
     container:
-      # image: docker.io/ifxmakers/makers-docker:latest
-      image: ghcr.io/infineon/makers-docker:latest
+      image: docker.io/ifxmakers/makers-docker:latest
+      # image: ghcr.io/infineon/makers-docker:latest
       # credentials:
       #   # username: ${{ secrets.DOCKERHUB_USERNAME }}
       #   # password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -49,8 +49,8 @@ jobs:
     needs: setup
 
     container:
-      # image: docker.io/ifxmakers/makers-docker:latest
-      image: ghcr.io/infineon/makers-docker:latest
+      image: docker.io/ifxmakers/makers-docker:latest
+      # image: ghcr.io/infineon/makers-docker:latest
       # credentials:
       #   username: ${{ secrets.DOCKERHUB_USERNAME }}
       #   password: ${{ secrets.DOCKERHUB_PASSWORD }}
