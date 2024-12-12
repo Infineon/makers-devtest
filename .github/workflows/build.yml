@@ -20,11 +20,11 @@ jobs:
     container:
       # image: docker.io/ifxmakers/makers-docker:latest
       image: ghcr.io/infineon/makers-docker:latest
-      credentials:
-        # username: ${{ secrets.DOCKERHUB_USERNAME }}
-        # password: ${{ secrets.DOCKERHUB_PASSWORD }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.github_token }}
+      # credentials:
+      #   # username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #   # password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      #   username: ${{ github.actor }}
+      #   password: ${{ secrets.github_token }}
       volumes:
         - .:/myLocalWorkingDir:rw
       options: --cpus 1
@@ -51,11 +51,11 @@ jobs:
     container:
       # image: docker.io/ifxmakers/makers-docker:latest
       image: ghcr.io/infineon/makers-docker:latest
-      credentials:
-        # username: ${{ secrets.DOCKERHUB_USERNAME }}
-        # password: ${{ secrets.DOCKERHUB_PASSWORD }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.github_token }}
+      # credentials:
+      #   username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #   password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        # username: ${{ github.actor }}
+        # password: ${{ secrets.github_token }}
       volumes:
         - .:/myLocalWorkingDir:rw
       options: --cpus 1
