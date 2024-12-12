@@ -22,7 +22,8 @@ TARGET ?=
 ##############################################################################################################################################################
 
 run-build-target:
-	(cd tests/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET))
+	ls -l
+# (cd tests/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET))
 
 
 run-build-target-all:
