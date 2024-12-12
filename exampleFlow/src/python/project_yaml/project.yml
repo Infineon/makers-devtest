@@ -1,0 +1,24 @@
+check:
+    clang-tidy-c:
+      description: clang-tidy check for c sources
+      sources: src/c/
+
+    clang-tidy-cpp:
+      description: clang-tidy check for cpp sources
+      sources: src/cpp/
+
+    cppcheck-c-cpp:
+      description: cppcheck check for all c/cpp sources
+      sources: src/c*
+
+    clang-formatc-cpp:
+      description: clang-format check for all c/cpp sources
+      sources: src/c*
+
+
+# just to show who wins the merge redefine a build check here
+build:
+    TLx493D_A1B6_XMC4700:
+      description: redefined
+      target: redefined
+      fqbn: redefined

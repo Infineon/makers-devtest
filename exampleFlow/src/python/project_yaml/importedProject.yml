@@ -1,0 +1,34 @@
+build:
+  - TLx493D_A1B6_XMC4700:
+    description: TLx493D_A1B6 for XMC4700
+    target: build_tlx493d_a1b6
+    fqbn: Infineon:xmc:XMC4700_Relax_Kit
+
+#     - TLx493D_A1B6_XMC1100:
+#       description: TLx493D_A1B6 for XMC1100
+#       target: build_tlx493d_a1b6
+#       fqbn: Infineon:xmc:XMC1100_Boot_Kit
+
+#     - TLx493D_A1B6_XMC1100:
+#       description: TLx493D_A1B6 for XMC1100
+#       target: build_tlx493d_a1b6
+#       fqbn: Infineon:xmc:XMC1100_XMC2GO
+
+
+# test:
+#     - TLx493D_A1B6_XMC4700:
+#       description: TLx493D_A1B6 for XMC4700
+#       target: test_tlx493d_a1b6
+#       query: 'subarchitecture=="xmc4700" and tlx493d_a1b6 > 0'
+
+#     - TLx493D_A1B6_XMC1100:
+#       description: TLx493D_A1B6 for XMC1100
+#       target: test_tlx493d_a1b6
+#       fqbn: Infineon:xmc:XMC1100_Boot_Kit
+#       query: 'subarchitecture=="xmc1100_boot_kit" and tlx493d_a1b6 > 0'
+
+#     - TLx493D_A1B6_XMC1100:
+#       description: TLx493D_A1B6 for XMC1100
+#       target: test_tlx493d_a1b6
+#       fqbn: Infineon:xmc:XMC1100_XMC2GO
+#       query: 'subarchitecture=="xmc1100_xmc2go" and tlx493d_a1b6 > 0'

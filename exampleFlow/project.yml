@@ -1,0 +1,20 @@
+build:
+    build-wire-XMC4700:
+      description: Compiling test_wire_connected1_pingpong.cpp for XMC4700 platform
+      target: test_wire_connected1_pingpong
+      fqbn: Infineon:xmc:XMC4700_Relax_Kit
+
+    build-wire-XMC1100:
+      description: Compiling test_wire_connected2_masterpingpong.cpp for XMC1100 platform
+      target: test_wire_connected2_masterpingpong
+      fqbn: Infineon:xmc:XMC1100_Boot_Kit
+
+
+check:
+    check-clang-tidy-wire:
+      description: clang-tidy check for wire sources
+      command: clang-tidy -header-filter=. ./tests/arduino-core-tests/src/corelibs/wire/test_wire_connected1_pingpong.cpp --
+
+    check-cppcheck-wire:
+      description: cppcheck check for wire sources
+      command: exampleFlow/bin/run_cppcheck.sh tests/arduino-core-tests/src/corelibs/wire/*
