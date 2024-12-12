@@ -16,11 +16,18 @@ jobs:
 
     runs-on: ubuntu-24.04
 
+
+    env:
+      GHCR_REGISTRY: ghcr.io
+      # issue : organization "Infineon" with capital "I" not allowed.
+      IMAGE_NAME: infineon/makers-docker
+
+
     container:
       image: ghcr.io/infineon/makers-docker:latest
 
       credentials:
-        username: ${{ github.actor }}
+        username: infineon
         password: ${{ secrets.github_token }}
 
       volumes:
@@ -54,7 +61,7 @@ jobs:
       image: ghcr.io/infineon/makers-docker:latest
 
       credentials:
-        username: ${{ github.actor }}
+        username: infineon
         password: ${{ secrets.github_token }}
 
       volumes:
