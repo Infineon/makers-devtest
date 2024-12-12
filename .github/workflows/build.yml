@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     container:
-      image: ghcr.io/infineon/makers-docker:push
+      image: ghcr.io/infineon/makers-docker:latest
 
       credentials:
         username: ${{ github.actor }}
@@ -51,7 +51,7 @@ jobs:
     needs: setup
 
     container:
-      image: ghcr.io/${{ github.actor }}/cicdtemplate:latest
+      image: ghcr.io/infineon/makers-docker:latest
 
       credentials:
         username: ${{ github.actor }}
