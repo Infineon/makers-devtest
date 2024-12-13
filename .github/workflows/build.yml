@@ -72,6 +72,9 @@ jobs:
 
     - name: Checkout actions
       uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        token: ${{ secrets.github_token }}
 
     - name: Demo to show use of script to use matrix values
       id: run_build
