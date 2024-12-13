@@ -34,7 +34,7 @@ jobs:
       - name: Checkout actions
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           token: ${{ secrets.PAT_TOKEN }}
 
 
@@ -74,7 +74,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: recursive
-        token: ${{ secrets.github_token }}
+        token: ${{ secrets.PAT_TOKEN }}
 
     - name: Demo to show use of script to use matrix values
       id: run_build
