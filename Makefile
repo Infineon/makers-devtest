@@ -73,7 +73,7 @@ run-project-workflow: pull-container
 # check container content
 run-container-bash:
 	docker pull dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:push
-# docker pull ghcr.io/infineon/makers-docker:latest
+# docker pull ghcr.io/infineon/makers-docker:latest 
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:push
 
 # check container content
