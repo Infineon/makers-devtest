@@ -34,7 +34,7 @@ jobs:
       - name: Checkout actions
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: true
           token: ${{ secrets.github_token }}
 
 
