@@ -24,7 +24,7 @@ jobs:
       #   # username: ${{ secrets.DOCKERHUB_USERNAME }}
       #   # password: ${{ secrets.DOCKERHUB_PASSWORD }}
       #   username: ${{ github.actor }}
-      #   password: ${{ secrets.github_token }}
+      #   password: ${{ secrets.PAT_TOKEN }}
       volumes:
         - .:/myLocalWorkingDir:rw
       options: --cpus 1
