@@ -23,7 +23,9 @@ UNITY_PATH ?=
 ##############################################################################################################################################################
 
 run-build-target:
+	echo "run-build-target : $(FQBN) Unity $(TARGET) -> running workaround.sh ..."
 	exampleFlow/bin/workaround.sh $(FQBN) Unity $(TARGET)
+	echo "run-build-target : $(FQBN) Unity $(TARGET) -> running workaround.sh done."
 # (cd tests/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET))
 
 
@@ -70,7 +72,8 @@ run-project-workflow: pull-container
 
 # check container content
 run-container-bash:
-	docker pull ghcr.io/infineon/makers-docker:latest
+	docker pull dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:latest
+# docker pull ghcr.io/infineon/makers-docker:latest
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest
 
 # check container content
@@ -82,4 +85,5 @@ run-container-check:
 # run stuff with container from docker hub
 run-container-docker:
 	docker pull dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:latest
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:latest make run-build-all
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --runBuildJob build-wire-XMC4700
+	# docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:latest make run-build-all
