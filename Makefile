@@ -24,9 +24,9 @@ UNITY_PATH ?=
 
 run-build-target:
 	echo "run-build-target : $(FQBN) Unity $(TARGET) -> running workaround.sh ..."
-	exampleFlow/bin/workaround.sh $(FQBN) Unity $(TARGET)
+# exampleFlow/bin/workaround.sh $(FQBN) Unity $(TARGET)
+	(cd tests/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET))
 	echo "run-build-target : $(FQBN) Unity $(TARGET) -> running workaround.sh done."
-# (cd tests/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET))
 
 
 run-build-target-all:
