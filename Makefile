@@ -41,49 +41,60 @@ run-build-all:
 	cd tests/arduino-core-tests ; make FQBN=Infineon:xmc:XMC4700_Relax_Kit UNITY_PATH=Unity test_wire_connected2_masterpingpong
 
 
+##############################################################################################################################################################
+
+
+TAG=push
+
+DOCKER=dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:$(TAG)
+GHCR=ghcr.io/infineon/makers-docker:$(TAG)
+
+REGISTRY=$(DOCKER)
 
 # containerized actions
 pull-container:
-	docker pull ghcr.io/infineon/makers-docker:latest
+	docker pull $(REGISTRY)
 
 
 run-container-build-all: pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest make run-build-target-all
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) make run-build-target-all
 
 
 run-container-check-wire: pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/run_cppcheck.sh tests/arduino-core-tests/src/corelibs/wire
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/run_cppcheck.sh tests/arduino-core-tests/src/corelibs/wire
 	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 
 run-project-setup-script: pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest python3 exampleFlow/runProjectSetup.py
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) python3 exampleFlow/runProjectSetup.py
 # firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 
 run-project-workflow: pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --getBuildJobs
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --runBuildJob build-wire-XMC4700
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --runBuildJob check-clang-tidy-wire
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --runBuildJob check-cppcheck-wire
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --getBuildJobs
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob build-wire-XMC4700
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob check-clang-tidy-wire
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob check-cppcheck-wire
 	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 ##############################################################################################################################################################
 
 # check container content
 run-container-bash:
-	docker pull dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:push
-# docker pull ghcr.io/infineon/makers-docker:latest 
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:push
+	echo "REGISTRY : " $(REGISTRY)
+	docker pull $(REGISTRY)
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) 
 
 # check container content
 run-container-check:
-	docker pull ghcr.io/infineon/makers-docker:latest
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/print_tool_versions.sh
+	echo "REGISTRY : " $(REGISTRY)
+	docker pull $(REGISTRY)
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/print_tool_versions.sh
 
 
 # run stuff with container from docker hub
 run-container-docker:
-	docker pull dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:latest
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --runBuildJob build-wire-XMC4700
-	# docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:latest make run-build-all
+	echo "REGISTRY : " $(REGISTRY)
+	docker pull $(REGISTRY)
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob build-wire-XMC4700
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) make run-build-all
