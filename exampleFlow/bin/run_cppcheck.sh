@@ -1,5 +1,11 @@
 #!/bin/sh
 
+
+if [ ! -d "$exampleFlow/results/cppcheck" ]; then
+  mkdir -p exampleFlow/results/cppcheck
+fi
+
+
 # --suppress=misra* --suppress=duplicateBreak
 
 cppcheck --error-exitcode=1 --check-level=exhaustive --enable=all --inconclusive \
@@ -8,9 +14,9 @@ cppcheck --error-exitcode=1 --check-level=exhaustive --enable=all --inconclusive
          --max-configs=50 --xml 2> exampleFlow/results/cppcheck/cppcheck-errors.xml $*
 ret=$?
 
-cppcheck --version
-which cppcheck
-which cppcheck-htmlreport
+# cppcheck --version
+# which cppcheck
+# which cppcheck-htmlreport
 
 cppcheck-htmlreport --file=exampleFlow/results/cppcheck/cppcheck-errors.xml --title=TestCPPCheck --report-dir=exampleFlow/results/cppcheck/cppcheck-reports --source-dir=.
 # mv cppcheck-errors.xml cppcheck-reports
