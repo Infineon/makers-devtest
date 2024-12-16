@@ -44,7 +44,7 @@ jobs:
           eval $(python3 exampleFlow/bin/codeChecks.py --getAllChecks)
 
     outputs:
-      build_jobs: ${{ steps.set-matrix.outputs.checks }}
+      checks: ${{ steps.set-matrix.outputs.checks }}
 
 
   flowStep:
@@ -66,7 +66,7 @@ jobs:
     strategy:
 
       matrix:
-        build_jobs: ${{ fromJson(needs.setup.outputs.checks) }}
+        checks: ${{ fromJson(needs.setup.outputs.checks) }}
 
     steps:
 
@@ -82,7 +82,7 @@ jobs:
       if: success() || failure()
       run: |
         echo "Workflow has these parameters :"
-        echo "matrix.build_jobs   : " ${{ matrix.build_jobs }}
+        echo "matrix.checks   : " ${{ matrix.checks }}
         echo ""
 
-        python3 exampleFlow/bin/codeChecks.py --runCheck ${{ matrix.build_jobs }} --showLogs
+        python3 exampleFlow/bin/codeChecks.py --runCheck ${{ matrix.checks }} --showLogs
