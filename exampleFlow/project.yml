@@ -13,8 +13,10 @@ build:
 check:
     check-clang-tidy-wire:
       description: clang-tidy check for wire sources
-      command: clang-tidy -header-filter=. ./tests/arduino-core-tests/src/corelibs/wire/test_wire_connected1_pingpong.cpp --
+      tool: clang-tidy
+      command: clang-tidy --config-file=config/clang-tidy/.clang-tidy -header-filter=. ./tests/arduino-core-tests/src/corelibs/wire/test_wire_connected1_pingpong.cpp --
 
     check-cppcheck-wire:
       description: cppcheck check for wire sources
+      tool: cppcheck
       command: exampleFlow/bin/run_cppcheck.sh tests/arduino-core-tests/src/corelibs/wire/*

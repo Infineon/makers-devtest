@@ -41,7 +41,7 @@ jobs:
       - name: Set strategy matrix
         id: set-matrix
         run: |
-          eval $(python3 exampleFlow/bin/build.py --getBuildJobs)
+          eval $(python3 exampleFlow/bin/codeChecks.py --getAllChecks)
 
     outputs:
       build_jobs: ${{ steps.set-matrix.outputs.build_jobs }}
@@ -85,4 +85,4 @@ jobs:
         echo "matrix.build_jobs   : " ${{ matrix.build_jobs }}
         echo ""
 
-        exampleFlow/bin/build.sh --runBuildJob ${{ matrix.build_jobs }}
+        exampleFlow/bin/codeChecks.py --runCheck ${{ matrix.build_jobs }} --showLogs

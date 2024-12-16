@@ -5,27 +5,24 @@
 
 FQBN   ?=
 TARGET ?=
-UNITY_PATH ?=
-
-
-clean-results:
-	-rm -rf exampleFlow/results/cppcheck/*
-
+UNITY_PATH ?= Unity
 
 
 ##############################################################################################################################################################
 
-
+clean-results:
+	-rm -rf exampleFlow/results/cppcheck/*  exampleFlow/results/clang-tidy/* exampleFlow/results/build/*
+	- mkdir -p exampleFlow/results/cppcheck exampleFlow/results/clang-tidy exampleFlow/results/build
 
 
 
 ##############################################################################################################################################################
 
 run-build-target:
-	echo "run-build-target : $(FQBN) Unity $(TARGET) -> running workaround.sh ..."
-# exampleFlow/bin/workaround.sh $(FQBN) Unity $(TARGET)
 	(cd tests/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET))
-	echo "run-build-target : $(FQBN) Unity $(TARGET) -> running workaround.sh done."
+
+
+##############################################################################################################################################################
 
 
 run-build-target-all:
@@ -45,56 +42,60 @@ run-build-all:
 
 TAG=push
 
-DOCKER=dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:$(TAG)
-GHCR=ghcr.io/infineon/makers-docker:$(TAG)
+DOCKER_REGISTRY=dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:$(TAG)
+GHCR_REGISTRY=ghcr.io/infineon/makers-docker:$(TAG)
 
-REGISTRY=$(DOCKER)
+REGISTRY=$(DOCKER_REGISTRY)
 
-# containerized actions
+DOCKER=docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY)
+#DOCKER=
+
+
+### Setting DOCKER variable to empty string => containers not used
+### Setting DOCKER variable to "docker run ..." => containers used
+
+
 pull-container:
 	docker pull $(REGISTRY)
 
 
 run-container-build-all: clean-results pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) make run-build-target-all
+	$(DOCKER) make run-build-target-all
 
 
 run-container-check-wire: clean-results pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/run_cppcheck.sh tests/arduino-core-tests/src/corelibs/wire
+	$(DOCKER) exampleFlow/bin/run_cppcheck.sh tests/arduino-core-tests/src/corelibs/wire
 	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
-
-run-container-clang-wire: clean-results pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob check-clang-tidy-wire
 
 
 run-container-project-setup-script: clean-results pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) python3 exampleFlow/runProjectSetup.py
-	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --getAllChecks
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runCheck check-clang-tidy-wire
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runAllChecks
+#	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 
-run-project-workflow: clean-results pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --getBuildJobs
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob build-wire-XMC4700
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob check-clang-tidy-wire
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob check-cppcheck-wire
+run-container-project-setup-script-with-show-logs: clean-results pull-container
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --getAllChecks
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runCheck check-clang-tidy-wire --showLog
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runAllChecks --showLog
+#	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
+
+
+run-container-cppcheck: clean-results pull-container
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runCheck check-cppcheck-wire
 	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 ##############################################################################################################################################################
 
 # check container content
 run-container-bash: pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) 
-
-# check container content
-run-container-print: pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/print_tool_versions.sh
+	$(DOCKER) 
 
 
 # run stuff with container from docker hub
 run-container-build: clean-results pull-container
-#    echo "REGISTRY : " $(REGISTRY)
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob build-wire-XMC4700
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) make run-build-all
+	$(DOCKER) make run-build-all
 
 
 
