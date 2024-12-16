@@ -86,3 +86,11 @@ jobs:
         echo ""
 
         python3 exampleFlow/bin/codeChecks.py --runCheck ${{ matrix.checks }} --showLog
+
+
+    - name: Archive tool reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: Build reports
+        path: |
+          exampleFlow/results
