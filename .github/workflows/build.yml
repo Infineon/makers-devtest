@@ -2,7 +2,7 @@ name: Build workflow with strategy
 
 on:
   push:
-    branches: [ workflow_test ]
+    branches: [ '*' ]
 
 defaults:
   run:
