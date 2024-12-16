@@ -5,25 +5,30 @@
 
 FQBN   ?=
 TARGET ?=
-
-
-# clean-all:
-#  clean
-# 	-rm -rf cppcheck-reports cppcheck-errors.xml
-
+UNITY_PATH ?= Unity
 
 
 ##############################################################################################################################################################
 
+clean-results:
+	-rm -rf exampleFlow/results/cppcheck/*  exampleFlow/results/clang-tidy/* exampleFlow/results/build/*
+	- mkdir -p exampleFlow/results/cppcheck exampleFlow/results/clang-tidy exampleFlow/results/build
 
 
-
-#  35afbf0d7a07773fef35898551eb343cbf1859a1
 
 ##############################################################################################################################################################
 
 run-build-target:
-	cd tests/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET)
+	(cd tests/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET))
+
+
+##############################################################################################################################################################
+
+
+run-build-target-all:
+	make FQBN=Infineon:xmc:XMC4700_Relax_Kit UNITY_PATH=Unity TARGET=test_wire_connected1_pingpong       run-build-target
+	make FQBN=Infineon:xmc:XMC4700_Relax_Kit UNITY_PATH=Unity TARGET=test_wire_connected2_slavepingpong  run-build-target
+	make FQBN=Infineon:xmc:XMC4700_Relax_Kit UNITY_PATH=Unity TARGET=test_wire_connected2_masterpingpong run-build-target
 
 
 run-build-all:
@@ -32,44 +37,66 @@ run-build-all:
 	cd tests/arduino-core-tests ; make FQBN=Infineon:xmc:XMC4700_Relax_Kit UNITY_PATH=Unity test_wire_connected2_masterpingpong
 
 
+##############################################################################################################################################################
 
-# containerized actions
+
+TAG=push
+
+DOCKER_REGISTRY=dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:$(TAG)
+GHCR_REGISTRY=ghcr.io/infineon/makers-docker:$(TAG)
+
+REGISTRY=$(DOCKER_REGISTRY)
+
+DOCKER=docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY)
+#DOCKER=
+
+
+### Setting DOCKER variable to empty string => containers not used
+### Setting DOCKER variable to "docker run ..." => containers used
+
+
 pull-container:
-	docker pull ghcr.io/infineon/makers-docker:latest
+	docker pull $(REGISTRY)
 
 
-run-container-build-all: pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest make run-build-all
+run-container-build-all: clean-results pull-container
+	$(DOCKER) make run-build-target-all
 
 
-run-container-check-wire: pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/run_cppcheck.sh tests/arduino-core-tests/src/corelibs/wire
+run-container-check-wire: clean-results pull-container
+	$(DOCKER) exampleFlow/bin/run_cppcheck.sh tests/arduino-core-tests/src/corelibs/wire
 	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 
-run-project-setup-script: pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest python3 exampleFlow/runProjectSetup.py
-# firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
+run-container-project-setup-script: clean-results pull-container
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --getAllChecks
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runCheck check-clang-tidy-wire
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runAllChecks
+#	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 
-run-project-workflow: pull-container
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/build.sh --getBuildJobs
+run-container-project-setup-script-with-show-logs: clean-results pull-container
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --getAllChecks
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runCheck check-clang-tidy-wire --showLog
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runAllChecks --showLog
+#	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
+
+run-container-cppcheck: clean-results pull-container
+	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runCheck check-cppcheck-wire
+	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 ##############################################################################################################################################################
 
 # check container content
-run-container-bash:
-	docker pull ghcr.io/infineon/makers-docker:latest
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest
-
-# check container content
-run-container-check:
-	docker pull ghcr.io/infineon/makers-docker:latest
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw ghcr.io/infineon/makers-docker:latest exampleFlow/bin/print_tool_versions.sh
+run-container-bash: pull-container
+	$(DOCKER) 
 
 
 # run stuff with container from docker hub
-run-container-docker:
-	docker pull dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:latest
-	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:latest make run-build-all
+run-container-build: clean-results pull-container
+	$(DOCKER) make run-build-all
+
+
+
+

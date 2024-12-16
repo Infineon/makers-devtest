@@ -4,82 +4,93 @@ on:
   push:
     branches: [ workflow_test ]
 
-
 defaults:
   run:
     shell: bash
 
-
 jobs:
-
   setup:
-
     runs-on: ubuntu-24.04
 
+    # env:
+    #   GHCR_REGISTRY: ghcr.io
+    #   # issue : organization "Infineon" with capital "I" not allowed.
+    #   IMAGE_NAME: infineon/makers-docker
+
     container:
-      image: ghcr.io/infineon/makers-docker:push
-
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.github_token }}
-
+      image: docker.io/ifxmakers/makers-docker:push
+      # image: ghcr.io/infineon/makers-docker:latest
+      # credentials:
+      #   # username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #   # password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      #   username: ${{ github.actor }}
+      #   password: ${{ secrets.github_token }}
       volumes:
         - .:/myLocalWorkingDir:rw
-
       options: --cpus 1
 
     steps:
 
       - name: Checkout actions
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.PAT_TOKEN }}
 
 
       - name: Set strategy matrix
         id: set-matrix
         run: |
-          eval $(python3 bin/build.py --getBuildJobs)
-
+          eval $(python3 exampleFlow/bin/codeChecks.py --getAllChecks)
 
     outputs:
-      build_jobs: ${{ steps.set-matrix.outputs.build_jobs }}
+      checks: ${{ steps.set-matrix.outputs.checks }}
 
 
   flowStep:
-
     runs-on: ubuntu-24.04
-
     needs: setup
 
     container:
-      image: ghcr.io/${{ github.actor }}/cicdtemplate:latest
-
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.github_token }}
-
+      image: docker.io/ifxmakers/makers-docker:push
+      # image: ghcr.io/infineon/makers-docker:latest
+      # credentials:
+      #   username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #   password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        # username: ${{ github.actor }}
+        # password: ${{ secrets.github_token }}
       volumes:
         - .:/myLocalWorkingDir:rw
-
       options: --cpus 1
-
 
     strategy:
 
       matrix:
-        build_jobs: ${{ fromJson(needs.setup.outputs.build_jobs) }}
+        checks: ${{ fromJson(needs.setup.outputs.checks) }}
 
     steps:
 
     - name: Checkout actions
       uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        token: ${{ secrets.PAT_TOKEN }}
 
-
+        
     - name: Demo to show use of script to use matrix values
       id: run_build
       if: success() || failure()
       run: |
         echo "Workflow has these parameters :"
-        echo "matrix.build_jobs   : " ${{ matrix.build_jobs }}
+        echo "matrix.checks   : " ${{ matrix.checks }}
         echo ""
 
-        bin/build.sh --runBuildJob ${{ matrix.build_jobs }}
+        python3 exampleFlow/bin/codeChecks.py --runCheck ${{ matrix.checks }} --showLog
+
+ 
+    - name: Archive tool reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.checks }}.log
+        path: |
+          exampleFlow/results/${{ matrix.checks }}.log

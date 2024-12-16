@@ -28,12 +28,12 @@ def readProjectYAML(project, user):
     with open(project, "r") as file:
         projectYAML = yaml.safe_load(file)
 
-    print(f"projectYAML : {projectYAML}\n")
+    # print(f"projectYAML : {projectYAML}\n")
 
     with open(user, "r") as file:
         userYAML = yaml.safe_load(file)
 
-    print(f"userYAML : {userYAML}\n")
+    # print(f"userYAML : {userYAML}\n")
 
     checkProjectYAMLSchema(projectYAML)
     checkUserYAMLSchema(userYAML)

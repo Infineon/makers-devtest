@@ -11,6 +11,7 @@ projectYAMLSchema = {
     "check": {
         str: {
             "description": str,
+            "tool": str,
             "command": str,
         }
     },
