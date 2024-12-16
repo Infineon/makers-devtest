@@ -42,6 +42,11 @@ if __name__ == "__main__":
     # print(f"projectYAML : {projectYAML}\n")
     # print(f"userYAML : {userYAML}\n")
 
+    resultPath = "exampleFlow/results"
+
+    if not os.path.isdir(resultPath):
+        os.makedirs(resultPath)
+
     if args.runAllChecks:
         for (checkType, checkTypeList) in userYAML.items():
             if checkType not in projectYAML:
@@ -56,7 +61,7 @@ if __name__ == "__main__":
                     exit(1)
 
                 if checkType == 'build':
-                    with open(f"exampleFlow/results/{check}.log", "w") as logfile:
+                    with open(f"{resultPath}/{check}.log", "w") as logfile:
                         returnCodeLocal |= subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[checkType][check]['fqbn']}", f"TARGET={projectYAML[checkType][check]['target']}"], stdout=logfile, stderr=logfile).returncode
 
                 elif checkType == 'check':
@@ -64,12 +69,12 @@ if __name__ == "__main__":
                         print(f"ERROR : 'command' not found in project YAML for {checkType} / {check} !")
                         exit(1)
 
-                    with open(f"exampleFlow/results/{check}.log", "w") as logfile:
+                    with open(f"{resultPath}/{check}.log", "w") as logfile:
                         returnCodeLocal |= subprocess.run(projectYAML[checkType][check]['command'].split(), stdout=logfile, stderr=logfile).returncode
 
 
                 if args.showLog:
-                    with open(f"exampleFlow/results/{check}.log", 'r') as f:
+                    with open(f"{resultPath}/{check}.log", 'r') as f:
                         print(f.read())
 
                 if returnCodeLocal != 0:
@@ -93,7 +98,7 @@ if __name__ == "__main__":
             exit(1)
 
         if type == 'build':
-            with open(f"exampleFlow/results/{check}.log", "w") as logfile:
+            with open(f"{resultPath}/{check}.log", "w") as logfile:
                 returnCodeLocal |= subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[type][check]['fqbn']}", f"TARGET={projectYAML[type][check]['target']}"], stdout=logfile, stderr=logfile).returncode
 
         elif type == 'check':
@@ -101,12 +106,12 @@ if __name__ == "__main__":
                 print(f"ERROR : 'command' not found in project YAML for {type} / {check} !")
                 exit(1)
         
-            with open(f"exampleFlow/results/{check}.log", "w") as logfile:
+            with open(f"{resultPath}/{check}.log", "w") as logfile:
                 returnCodeLocal |= subprocess.run(projectYAML[checkType][check]['command'].split(), stdout=logfile, stderr=logfile).returncode
 
 
         if args.showLog:
-            with open(f"exampleFlow/results/{check}.log", 'r') as f:
+            with open(f"{resultPath}/{check}.log", 'r') as f:
                 print(f.read())
 
         if returnCodeLocal != 0:
