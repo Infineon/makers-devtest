@@ -85,4 +85,4 @@ jobs:
         echo "matrix.checks   : " ${{ matrix.checks }}
         echo ""
 
-        python3 exampleFlow/bin/codeChecks.py --runCheck ${{ matrix.checks }} --showLogs
+        python3 exampleFlow/bin/codeChecks.py --runCheck ${{ matrix.checks }} --showLog
