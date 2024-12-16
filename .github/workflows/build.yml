@@ -91,6 +91,6 @@ jobs:
     - name: Archive tool reports
       uses: actions/upload-artifact@v4
       with:
-        name: Build reports
+        name: ${{ matrix.checks }}.log
         path: |
           exampleFlow/results/${{ matrix.checks }}.log
