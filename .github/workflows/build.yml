@@ -87,6 +87,12 @@ jobs:
 
         python3 exampleFlow/bin/codeChecks.py --runCheck ${{ matrix.checks }} --showLog
 
+ 
+  upload:
+    runs-on: ubuntu-24.04
+    needs: flowStep
+
+    steps:
 
     - name: Archive tool reports
       uses: actions/upload-artifact@v4
