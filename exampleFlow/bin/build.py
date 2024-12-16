@@ -50,22 +50,24 @@ if __name__ == "__main__":
         print(f"python : Running job {buildJob} ...")
 
         if type == 'build':
-            print(f"        {projectYAML[type][buildJob]['target']}  for  FQBN  {projectYAML[type][buildJob]['fqbn']}  ...")
+            # print(f"        {projectYAML[type][buildJob]['target']}  for  FQBN  {projectYAML[type][buildJob]['fqbn']}  ...")
 
             subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[type][buildJob]['fqbn']}", f"TARGET={projectYAML[type][buildJob]['target']}"])
 
-            print(f"        {projectYAML[type][buildJob]['target']}  for  FQBN  {projectYAML[type][buildJob]['fqbn']}  done.\n")
+            # print(f"        {projectYAML[type][buildJob]['target']}  for  FQBN  {projectYAML[type][buildJob]['fqbn']}  done.\n")
         elif type == 'check':
             if 'command' not in projectYAML[type][buildJob]:
                 print(f"ERROR : 'command' not found in project YAML for {type} / {buildJob} !")
                 exit(1)
 
-            print(f"        {projectYAML[type][buildJob]['command']}  ...")
+            # print(f"        {projectYAML[type][buildJob]['command']}  ...")
 
-            # subprocess.run(["clang-tidy", "-header-filter=.", "tests/arduino-core-tests/src/corelibs/wire/test_wire_connected1_pingpong.cpp", "--"])
-            subprocess.run(projectYAML[type][buildJob]['command'].split())
+            # # subprocess.run(["clang-tidy", "-header-filter=.", "tests/arduino-core-tests/src/corelibs/wire/test_wire_connected1_pingpong.cpp", "--"])
+            # subprocess.run(projectYAML[type][buildJob]['command'].split())
+            with open(f"exampleFlow/results/clang-tidy/{buildJob}.log", "w") as logfile:
+                subprocess.run(projectYAML[checkType][buildJob]['command'].split(), stdout=logfile, stderr=logfile)
 
-            print(f"        {projectYAML[type][buildJob]['command']}  done.\n")
+            # print(f"        {projectYAML[type][buildJob]['command']}  done.\n")
 
         print(f"python : Running job {buildJob} done.")
         ret = 0
@@ -92,6 +94,6 @@ if __name__ == "__main__":
         print(f"\nERROR : Wrong parameters passed !\n")
         ret = 1
 
-    print(f"{sys.argv[0]} done.")
+    # print(f"{sys.argv[0]} done.")
 
     exit(ret)

@@ -8,9 +8,8 @@ TARGET ?=
 UNITY_PATH ?=
 
 
-# clean-all:
-#  clean
-# 	-rm -rf cppcheck-reports cppcheck-errors.xml
+clean-results:
+	-rm -rf exampleFlow/results/cppcheck/*
 
 
 
@@ -56,21 +55,24 @@ pull-container:
 	docker pull $(REGISTRY)
 
 
-run-container-build-all: pull-container
+run-container-build-all: clean-results pull-container
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) make run-build-target-all
 
 
-run-container-check-wire: pull-container
+run-container-check-wire: clean-results pull-container
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/run_cppcheck.sh tests/arduino-core-tests/src/corelibs/wire
 	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
+run-container-clang-wire: clean-results pull-container
+	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob check-clang-tidy-wire
 
-run-project-setup-script: pull-container
+
+run-container-project-setup-script: clean-results pull-container
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) python3 exampleFlow/runProjectSetup.py
-# firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
+	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 
-run-project-workflow: pull-container
+run-project-workflow: clean-results pull-container
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --getBuildJobs
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob build-wire-XMC4700
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob check-clang-tidy-wire
@@ -80,21 +82,20 @@ run-project-workflow: pull-container
 ##############################################################################################################################################################
 
 # check container content
-run-container-bash:
-	echo "REGISTRY : " $(REGISTRY)
-	docker pull $(REGISTRY)
+run-container-bash: pull-container
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) 
 
 # check container content
-run-container-check:
-	echo "REGISTRY : " $(REGISTRY)
-	docker pull $(REGISTRY)
+run-container-print: pull-container
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/print_tool_versions.sh
 
 
 # run stuff with container from docker hub
-run-container-docker:
-	echo "REGISTRY : " $(REGISTRY)
-	docker pull $(REGISTRY)
+run-container-build: clean-results pull-container
+#    echo "REGISTRY : " $(REGISTRY)
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) exampleFlow/bin/build.sh --runBuildJob build-wire-XMC4700
 	docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY) make run-build-all
+
+
+
+

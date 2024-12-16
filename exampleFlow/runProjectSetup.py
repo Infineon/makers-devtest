@@ -44,41 +44,42 @@ if __name__ == "__main__":
         "exampleFlow/project.yml", "exampleFlow/user.yml"
     )
 
-    print(f"projectYAML : {projectYAML}\n")
+    # print(f"projectYAML : {projectYAML}\n")
 
     for (checkType, checkTypeList) in userYAML.items():
-        print(f"type : {checkType}")
+        # print(f"type : {checkType}")
 
         if checkType not in projectYAML:
             print(f"ERROR : {checkType} not found in project YAML !")
             exit(1)
 
         for check in checkTypeList:
-            print(f"    check : {check}")
+            # print(f"    check : {check}")
 
             if check not in projectYAML[checkType]:
                 print(f"ERROR : {check} not found in project YAML for {checkType} !")
                 exit(1)
 
             if checkType == 'build':
-                print(f"        {projectYAML[checkType][check]['target']}  for  FQBN  {projectYAML[checkType][check]['fqbn']}  ...")
+                # print(f"        {projectYAML[checkType][check]['target']}  for  FQBN  {projectYAML[checkType][check]['fqbn']}  ...")
 
                 subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[checkType][check]['fqbn']}", f"TARGET={projectYAML[checkType][check]['target']}"])
 
-                print(f"        {projectYAML[checkType][check]['target']}  for  FQBN  {projectYAML[checkType][check]['fqbn']}  done.\n")
+                # print(f"        {projectYAML[checkType][check]['target']}  for  FQBN  {projectYAML[checkType][check]['fqbn']}  done.\n")
             elif checkType == 'check':
                 if 'command' not in projectYAML[checkType][check]:
                     print(f"ERROR : 'command' not found in project YAML for {checkType} / {check} !")
                     exit(1)
 
-                print(f"        {projectYAML[checkType][check]['command']}  ...")
+                # print(f"        {projectYAML[checkType][check]['command']}  ...")
 
                 # subprocess.run(["clang-tidy", "-header-filter=.", "tests/arduino-core-tests/src/corelibs/wire/test_wire_connected1_pingpong.cpp", "--"])
-                subprocess.run(projectYAML[checkType][check]['command'].split())
+                with open(f"exampleFlow/results/clang-tidy/{check}.log", "w") as logfile:
+                    subprocess.run(projectYAML[checkType][check]['command'].split(), stdout=logfile)
 
-                print(f"        {projectYAML[checkType][check]['command']}  done.\n")
+                # print(f"        {projectYAML[checkType][check]['command'].split()}  done.\n")
 
-        print("\n")
+        # print("\n")
 
 
     exit(0)

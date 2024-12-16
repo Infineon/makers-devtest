@@ -39,8 +39,5 @@ echo "    which scanbuild : "`which scanbuild`
 echo ""
 
 
-arduino-cli board listall Infineon:xmc
-
-ls -lR ~/.arduino15/packages/Infineon/hardware/xmc/3.4.1
-
-grep -ri github /root/.arduino15
+# arduino-cli board listall Infineon:xmc
+# ls -lR ~/.arduino15/packages/Infineon/hardware/xmc/3.4.1

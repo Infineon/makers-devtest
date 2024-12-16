@@ -5,7 +5,7 @@
 #
 
 
-echo "executing $0 $* ..."
+# echo "executing $0 $* ..."
 
 
 usage() {
@@ -48,20 +48,20 @@ fi
 
 
 if [ ! -z "${getBuildJobs}" ]; then
-  echo "shell : getBuildJobs : ${getBuildJobs}"
+  # echo "shell : getBuildJobs : ${getBuildJobs}"
   python3 exampleFlow/bin/build.py --getBuildJobs ${getBuildJobs}
   ret=$?
 fi
 
 
 if [ ! -z "${runBuildJob}" ]; then
-  echo "shell : runBuildJob  : ${runBuildJob}"
+  # echo "shell : runBuildJob  : ${runBuildJob}"
   python3 exampleFlow/bin/build.py --runBuildJob ${runBuildJob}
   ret=$?
 fi
 
 
-echo "$0 done."
+# echo "$0 done."
 
 exit $ret
 
