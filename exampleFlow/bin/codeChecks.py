@@ -56,22 +56,21 @@ if __name__ == "__main__":
                     exit(1)
 
                 if checkType == 'build':
-                    if args.showLog:
-                        returnCodeLocal |= subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[checkType][check]['fqbn']}", f"TARGET={projectYAML[checkType][check]['target']}"]).returncode
-                    else:
-                        with open(f"exampleFlow/results/{checkType}/{check}.log", "w") as logfile:
-                            returnCodeLocal |= subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[checkType][check]['fqbn']}", f"TARGET={projectYAML[checkType][check]['target']}"], stdout=logfile, stderr=logfile).returncode
+                    with open(f"exampleFlow/results/{check}.log", "w") as logfile:
+                        returnCodeLocal |= subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[checkType][check]['fqbn']}", f"TARGET={projectYAML[checkType][check]['target']}"], stdout=logfile, stderr=logfile).returncode
 
                 elif checkType == 'check':
                     if 'command' not in projectYAML[checkType][check]:
                         print(f"ERROR : 'command' not found in project YAML for {checkType} / {check} !")
                         exit(1)
 
-                    if args.showLog:
-                        returnCodeLocal |= subprocess.run(projectYAML[checkType][check]['command'].split()).returncode
-                    else:
-                        with open(f"exampleFlow/results/{projectYAML[checkType][check]['tool']}/{check}.log", "w") as logfile:
-                            returnCodeLocal |= subprocess.run(projectYAML[checkType][check]['command'].split(), stdout=logfile, stderr=logfile).returncode
+                    with open(f"exampleFlow/results/{check}.log", "w") as logfile:
+                        returnCodeLocal |= subprocess.run(projectYAML[checkType][check]['command'].split(), stdout=logfile, stderr=logfile).returncode
+
+
+                if args.showLog:
+                    with open(f"exampleFlow/results/{check}.log", 'r') as f:
+                        print(f.read())
 
                 if returnCodeLocal != 0:
                     print(f"ERROR : Running check '{check}' failed !")
@@ -94,22 +93,21 @@ if __name__ == "__main__":
             exit(1)
 
         if type == 'build':
-            if args.showLog:
-                returnCodeLocal |= subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[type][check]['fqbn']}", f"TARGET={projectYAML[type][check]['target']}"]).returncode
-            else:
-                with open(f"exampleFlow/results/{type}/{check}.log", "w") as logfile:
-                    returnCodeLocal |= subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[type][check]['fqbn']}", f"TARGET={projectYAML[type][check]['target']}"], stdout=logfile, stderr=logfile).returncode
+            with open(f"exampleFlow/results/{check}.log", "w") as logfile:
+                returnCodeLocal |= subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[type][check]['fqbn']}", f"TARGET={projectYAML[type][check]['target']}"], stdout=logfile, stderr=logfile).returncode
 
         elif type == 'check':
             if 'command' not in projectYAML[type][check]:
                 print(f"ERROR : 'command' not found in project YAML for {type} / {check} !")
                 exit(1)
         
-            if args.showLog:
-                returnCodeLocal |= subprocess.run(projectYAML[checkType][check]['command'].split()).returncode
-            else:
-                with open(f"exampleFlow/results/{projectYAML[checkType][check]['tool']}/{check}.log", "w") as logfile:
-                    returnCodeLocal |= subprocess.run(projectYAML[checkType][check]['command'].split(), stdout=logfile, stderr=logfile).returncode
+            with open(f"exampleFlow/results/{check}.log", "w") as logfile:
+                returnCodeLocal |= subprocess.run(projectYAML[checkType][check]['command'].split(), stdout=logfile, stderr=logfile).returncode
+
+
+        if args.showLog:
+            with open(f"exampleFlow/results/{check}.log", 'r') as f:
+                print(f.read())
 
         if returnCodeLocal != 0:
             print(f"ERROR : Running check '{check}' failed !")
