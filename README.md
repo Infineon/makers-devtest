@@ -23,36 +23,36 @@
 [![Pre-commit used][pre-commit-shield]][pre-commit-url]
 
 
-<!-- [![CI](https://img.shields.io/github.com/Infineon/makers-devops/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Infineon/makers-devops/actions/workflows/build.yml)
-[![CI](https://img.shields.io/github.com/Infineon/makers-devops/actions/workflows/build.yml/badge.svg?branch=testpush)](https://github.com/Infineon/makers-devops/actions/workflows/build.yml)
+<!-- [![CI](https://img.shields.io/github.com/Infineon/makers-devtest/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Infineon/makers-devtest/actions/workflows/build.yml)
+[![CI](https://img.shields.io/github.com/Infineon/makers-devtest/actions/workflows/build.yml/badge.svg?branch=testpush)](https://github.com/Infineon/makers-devtest/actions/workflows/build.yml)
 
-[![Build Status](https://img.shields.io/github.com/Infineon/makers-devops/actions?style=plastic)](https://github.com/Infineon/makers-devops/actions)
+[![Build Status](https://img.shields.io/github.com/Infineon/makers-devtest/actions?style=plastic)](https://github.com/Infineon/makers-devtest/actions)
 
-[![Build Status](https://github.com/Infineon/makers-devops/workflows/CI/badge.svg)](https://github.com/Infineon/makers-devops/actions)
-[![CI](https://img.shields.io/github.com/Infineon/makers-devops/actions/workflows/build.yml/badge.svg?branch=testpush)](https://github.com/Infineon/makers-devops/actions) -->
+[![Build Status](https://github.com/Infineon/makers-devtest/workflows/CI/badge.svg)](https://github.com/Infineon/makers-devtest/actions)
+[![CI](https://img.shields.io/github.com/Infineon/makers-devtest/actions/workflows/build.yml/badge.svg?branch=testpush)](https://github.com/Infineon/makers-devtest/actions) -->
 
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <!-- <a href="https://github.com/Infineon/makers-devops">
+  <!-- <a href="https://github.com/Infineon/makers-devtest">
     <img src="https://img.shields.io/badge/Arduino-white?style=plastic&logo=arduino&logoColor=00878F" alt="Logo" width="200">
   </a> -->
 
-<h2 align="center">Makers-devops</h2>
+<h2 align="center">makers-devtest</h2>
 
   <p align="center">
     Makers' devops related template repository, i.e. workflows, special files, tool configs, ... .
     <br />
     <br />
-    <a href="https://github.com/Infineon/makers-devops"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Infineon/makers-devtest"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Infineon/makers-devops">View Demo</a>
+    <a href="https://github.com/Infineon/makers-devtest">View Demo</a>
     ·
-    <a href="https://github.com/Infineon/makers-devops/issues/new?labels=bug&template=bug_report_template.md">Report Bug</a>
+    <a href="https://github.com/Infineon/makers-devtest/issues/new?labels=bug&template=bug_report_template.md">Report Bug</a>
     ·
-    <a href="https://github.com/Infineon/makers-devops/issues/new?labels=enhancement&template=feature_request_template.md">Request Feature</a>
+    <a href="https://github.com/Infineon/makers-devtest/issues/new?labels=enhancement&template=feature_request_template.md">Request Feature</a>
    <br />
   </p>
 </div>
@@ -139,7 +139,7 @@ This is an example of how to list things you need to use the software and how to
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/Infineon/makers-devops.git
+   git clone https://github.com/Infineon/makers-devtest.git
    ```
 2. Install dependencies
    ```sh
@@ -147,7 +147,7 @@ This is an example of how to list things you need to use the software and how to
    ```
 3. Change git remote url to avoid accidental pushes to base project
    ```sh
-   git remote set-url origin Infineon/makers-devops
+   git remote set-url origin Infineon/makers-devtest
    git remote -v # confirm the changes
    ```
 
@@ -160,7 +160,7 @@ This is an example of how to list things you need to use the software and how to
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://github.com/Infineon/makers-devops/blob/main/README.md)_
+_For more examples, please refer to the [Documentation](https://github.com/Infineon/makers-devtest/blob/main/README.md)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -174,7 +174,7 @@ _For more examples, please refer to the [Documentation](https://github.com/Infin
 - [ ] Feature 3
     - [ ] Nested Feature
 
-See the [open issues](https://github.com/Infineon/makers-devops/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/Infineon/makers-devtest/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -193,7 +193,7 @@ If you have a suggestion that would make this better, please fork the repo and c
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-Before submitting a pull request, please check the  [Code of Conduct](https://github.com/Infineon/makers-devops/blob/main/CODE_OF_CONDUCT.md) of this project. Thank you for following these guidelines.
+Before submitting a pull request, please check the  [Code of Conduct](https://github.com/Infineon/makers-devtest/blob/main/CODE_OF_CONDUCT.md) of this project. Thank you for following these guidelines.
 
 Don't forget to give the project a star :star:! Thanks again!
 
@@ -209,8 +209,8 @@ See [CONTRIBUTING](CONTRIBUTING.md) for more information.
 <!-- CONTRIBUTORS -->
 ## Contributors
 
-<a href="https://github.com/Infineon/makers-devops/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Infineon/makers-devops" alt="contrib.rocks image" width="50" />
+<a href="https://github.com/Infineon/makers-devtest/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Infineon/makers-devtest" alt="contrib.rocks image" width="50" />
 </a>
 
 
@@ -229,7 +229,7 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 <!-- Your Name - [](https://) - email@address -->
 
-Project Link: [https://github.com/Infineon/makers-devops](https://github.com/Infineon/makers-devops)
+Project Link: [https://github.com/Infineon/makers-devtest](https://github.com/Infineon/makers-devtest)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -252,37 +252,37 @@ Project Link: [https://github.com/Infineon/makers-devops](https://github.com/Inf
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[commit-shield]: https://img.shields.io/github/commit-activity/w/Infineon/makers-devops/main?style=plastic
-[commit-url]: https://github.com/Infineon/makers-devops/commits
-[commit2-shield]: https://img.shields.io/github/commit-activity/w/Infineon/makers-devops/main?style=plastic
-[commit2-url]: https://github.com/Infineon/makers-devops/tree/main
+[commit-shield]: https://img.shields.io/github/commit-activity/w/Infineon/makers-devtest/main?style=plastic
+[commit-url]: https://github.com/Infineon/makers-devtest/commits
+[commit2-shield]: https://img.shields.io/github/commit-activity/w/Infineon/makers-devtest/main?style=plastic
+[commit2-url]: https://github.com/Infineon/makers-devtest/tree/main
 
-[contributors-shield]: https://img.shields.io/github/contributors/Infineon/makers-devops.svg?style=plastic
-[contributors-url]: https://github.com/Infineon/makers-devops/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/Infineon/makers-devtest.svg?style=plastic
+[contributors-url]: https://github.com/Infineon/makers-devtest/graphs/contributors
 
 [contributor-covenant-shield]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
-[contributor-covenant-url]: https://github.com/Infineon/makers-devops/blob/main/CODE_OF_CONDUCT.md
+[contributor-covenant-url]: https://github.com/Infineon/makers-devtest/blob/main/CODE_OF_CONDUCT.md
 
 [doc-status-shield]: https://readthedocs.org/projects/xmc-arduino/badge/?version=latest
 [doc-status-url]: https://xmc-arduino.readthedocs.io/en/latest/?badge=latest
 
-[forks-shield]: https://img.shields.io/github/forks/Infineon/makers-devops.svg?style=plastic
-[forks-url]: https://github.com/Infineon/makers-devops/network/members
+[forks-shield]: https://img.shields.io/github/forks/Infineon/makers-devtest.svg?style=plastic
+[forks-url]: https://github.com/Infineon/makers-devtest/network/members
 
-[issues-shield]: https://img.shields.io/github/issues/Infineon/makers-devops.svg?style=plastic
-[issues-url]: https://github.com/Infineon/makers-devops/issues
+[issues-shield]: https://img.shields.io/github/issues/Infineon/makers-devtest.svg?style=plastic
+[issues-url]: https://github.com/Infineon/makers-devtest/issues
 
-[license-shield]: https://img.shields.io/github/license/Infineon/makers-devops.svg?style=plastic
-[license-url]: https://github.com/Infineon/makers-devops/blob/main/LICENSE
+[license-shield]: https://img.shields.io/github/license/Infineon/makers-devtest.svg?style=plastic
+[license-url]: https://github.com/Infineon/makers-devtest/blob/main/LICENSE
 
 [pre-commit-shield]: https://img.shields.io/badge/pre--commit-enabled-brightgreen.svg?logo=pre-commit
 [pre-commit-url]: https://github.com/pre-commit/pre-commit
 
-[pull-request-shield]: https://img.shields.io/github/issues-pr-raw/Infineon/makers-devops.svg?style=plastic
-[pull-request-url]: https://github.com/Infineon/makers-devops/pulls
+[pull-request-shield]: https://img.shields.io/github/issues-pr-raw/Infineon/makers-devtest.svg?style=plastic
+[pull-request-url]: https://github.com/Infineon/makers-devtest/pulls
 
-[stars-shield]: https://img.shields.io/github/stars/Infineon/makers-devops.svg?style=plastic
-[stars-url]: https://github.com/Infineon/makers-devops/stargazers
+[stars-shield]: https://img.shields.io/github/stars/Infineon/makers-devtest.svg?style=plastic
+[stars-url]: https://github.com/Infineon/makers-devtest/stargazers
 
 <!-- [product-screenshot]: images/screenshot.png -->
 
