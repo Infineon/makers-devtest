@@ -41,6 +41,7 @@ run-build-all:
 
 
 TAG=push
+TAG=latest
 
 DOCKER_REGISTRY=dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:$(TAG)
 GHCR_REGISTRY=ghcr.io/infineon/makers-docker:$(TAG)
@@ -64,7 +65,7 @@ run-container-build-all: clean-results pull-container
 
 
 run-container-check-wire: clean-results pull-container
-	$(DOCKER) exampleFlow/bin/run_cppcheck.sh tests/arduino-core-tests/src/corelibs/wire
+	$(DOCKER) exampleFlow/bin/run_cppcheck.sh exampleFlow/src/cpp/* tests/arduino-core-tests/src/corelibs/wire
 	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
 
 
