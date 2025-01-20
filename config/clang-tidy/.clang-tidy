@@ -25,7 +25,7 @@ clang-analyzer-*,
 '
 
 
-WarningsAsErrors: ''
+WarningsAsErrors: '*'
 HeaderFilterRegex: '.*'
 #HeaderFilterRegex: '*spdlog/[^f].*'
 #AnalyzeTemporaryDtors: false
