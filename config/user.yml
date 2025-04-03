@@ -1,0 +1,4 @@
+check:
+    - check-clang-tidy
+    - check-cppcheck
+

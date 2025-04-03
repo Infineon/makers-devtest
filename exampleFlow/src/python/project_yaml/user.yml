@@ -1,7 +1,0 @@
-check:
-    - check-clang-tidy-wire
-    - check-cppcheck-wire
-
-build:
-    - build-wire-XMC4700
-    - build-wire-XMC1100
