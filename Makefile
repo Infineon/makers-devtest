@@ -85,8 +85,12 @@ run-container-project-setup-script-with-show-logs: clean-results pull-container
 
 
 run-container-cppcheck: clean-results pull-container
-	$(DOCKER) python3 exampleFlow/bin/codeChecks.py --runCheck check-cppcheck-wire
+	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck check-cppcheck
 	firefox exampleFlow/results/cppcheck/cppcheck-reports/index.html
+
+
+run-container-clang-tidy: clean-results pull-container
+	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck check-clang-tidy
 
 ##############################################################################################################################################################
 
