@@ -145,4 +145,5 @@ if __name__ == "__main__":
         print(f"\nERROR : Wrong parameters passed !\n")
         returnCode = 1
 
-    exit(returnCode)
+    exit(1)
+    # exit(returnCode)
