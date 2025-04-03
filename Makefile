@@ -47,6 +47,7 @@ DOCKER_REGISTRY=dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:$(TAG
 GHCR_REGISTRY=ghcr.io/infineon/makers-docker:$(TAG)
 
 REGISTRY=$(DOCKER_REGISTRY)
+# REGISTRY=$(GHCR_REGISTRY)
 
 DOCKER=docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY)
 #DOCKER=
