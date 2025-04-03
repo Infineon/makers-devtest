@@ -18,7 +18,7 @@ from project_yaml.readProjectYAML import readProjectYAML
 
 def parseArgs():
     # parser = argparse.ArgumentParser(prog = 'checkCode')
-    parser = argparse.ArgumentParser() # prog = 'runProjectSetup')
+    parser = argparse.ArgumentParser()
 
     parser.add_argument('--getAllChecks', action='store_true',   help='getAllChecks help')
     parser.add_argument('--runAllChecks', action='store_true',   help='runAllChecks help')
