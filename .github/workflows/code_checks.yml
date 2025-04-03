@@ -43,8 +43,7 @@ jobs:
       - name: Set strategy matrix
         id: set-matrix
         run: |
-          ls -l
-          ls -l makers-devops
+          ls -lR
           eval $(python3 makers-devops/tools/code_checks/codeChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --getAllChecks)
         #   eval $(python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --getAllChecks)
 
