@@ -1,13 +1,176 @@
-name: Code Checks
+name: Code Quality Checks
 
 on:
   push:
-    
-jobs:
-  makers-devops:
-    uses: Infineon/makers-devops/.github/workflows/code_checks.yml@main
-    with:
-      project-yaml: config/project.yml
-      user-yaml: config/user.yml
-    secrets: inherit
+  pull_request:
+  workflow_call:
+    inputs:
+      project-yaml:
+        required: true
+        type: string
+        description: 'Project Yaml file that consists of build and check configurations'
+      user-yaml:
+        required: true
+        type: string
+        description: 'User Yaml file with list of build and checks to be executed'
 
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  setup:
+    runs-on: ubuntu-24.04
+
+    container:
+      image: docker.io/ifxmakers/makers-docker:latest
+      volumes:
+        - .:/myLocalWorkingDir:rw
+      options: --cpus 1
+
+    steps:
+      - name: Checkout repository 
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Checkout makers-devops
+        uses: actions/checkout@v4
+        with:
+          repository: Infineon/makers-devops
+          path: extras/makers-devops
+
+      - name: Set strategy matrix
+        id: set-matrix
+        run: |
+          eval $(extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --getAllChecks)
+        #   eval $(python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --getAllChecks)
+
+      - name: Append Code Checks Output to Summary
+        run: |
+          echo "## 📜 Code Quality Report" >> $GITHUB_STEP_SUMMARY
+
+    outputs:
+      checks: ${{ steps.set-matrix.outputs.checks }}
+      
+
+  codeChecks:
+    runs-on: ubuntu-24.04
+    needs: setup
+
+    container:
+      image: docker.io/ifxmakers/makers-docker:latest
+      volumes:
+        - .:/myLocalWorkingDir:rw
+      options: --cpus 1
+
+    strategy:
+      fail-fast: false
+      
+      matrix:
+        checks: ${{ fromJson(needs.setup.outputs.checks) }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Checkout makers-devops
+        uses: actions/checkout@v4
+        with:
+          repository: Infineon/makers-devops
+          path: extras/makers-devops
+
+      # - name: Set execute permissions for all .sh files in a folder 
+        # run: |
+        #   find extras/makers-devops/tools/code_checks/ -name "*.sh" -exec chmod +x {} \;
+
+      - name: Run all code checks
+        id: run_build
+        run: |
+          echo "Workflow has these parameters :"
+          echo "matrix.checks   : ${{ matrix.checks }}"
+          echo ""
+          # python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}  > output.log
+          extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}  > output.log
+
+      - name: Archive code check reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.checks }}
+          path: _results
+
+      - name: Append Code Checks Output to Summary
+        run: |
+          echo "<details>" >> $GITHUB_STEP_SUMMARY
+          cat output.log >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+
+  GenerateAndUploadReports:
+    runs-on: ubuntu-24.04
+    needs:
+      - codeChecks
+      - setup
+
+    container:
+      image: docker.io/ifxmakers/makers-docker:latest
+      volumes:
+        - .:/myLocalWorkingDir:rw
+      options: --cpus 1
+
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Checkout makers-devops
+        uses: actions/checkout@v4
+        with:
+          repository: Infineon/makers-devops
+          path: makers-devops
+
+      - name: Download cppcheck artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: check-cppcheck
+          path: _results
+
+      - name: Download clang-tidy artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: check-clang-tidy
+          path: _results
+
+      - name: Merge cppcheck and clang-tidy Reports
+        run: |
+          python3 makers-devops/tools/code_checks/merge_clang_tidy_cppcheck.py \
+            --logDir=_results/clang-tidy/check-clang-tidy \
+            --xmlPath=_results/cppcheck/check-cppcheck/check-cppcheck-errors.xml
+
+          cppcheck-htmlreport \
+            --file=_results/cppcheck/check-cppcheck/check-cppcheck-errors.xml \
+            --title=CPPCheck \
+            --report-dir=_results/cppcheck/check-cppcheck/html-report \
+            --source-dir=.
+
+      - name: Upload HTML report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-report
+          path: _results/cppcheck/check-cppcheck/html-report
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _results/cppcheck/check-cppcheck/html-report
+          keep_files: false 
+
+      - name: Display Report URL
+        run: |
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          echo "**Deploying report to GitHub Pages**" >> $GITHUB_STEP_SUMMARY
+          echo "[View Cppcheck and Clang-tidy Report]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
+          echo "URL: $REPORT_URL"  # Also print it in logs for visibility      
