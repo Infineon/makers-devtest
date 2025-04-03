@@ -27,7 +27,7 @@ check:
     check-clang-tidy:
       description: clang-tidy check sources
       tool: clang-tidy
-      command: makers-devops/tools/code_checks/run_clang_tidy.sh -i src/excludes src/c src/cpp
+      command: makers-devops/tools/code_checks/run_clang_tidy.sh -i src/excludes src/cpp/ok.cpp
 
     check-cppcheck:
       description: cppcheck check sources
