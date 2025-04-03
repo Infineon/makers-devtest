@@ -38,12 +38,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Infineon/makers-devops
-          path: extras/makers-devops
+          path: makers-devops
 
       - name: Set strategy matrix
         id: set-matrix
         run: |
-          eval $(python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --getAllChecks)
+          eval $(python3 makers-devops/tools/code_checks/codeChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --getAllChecks)
         #   eval $(python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --getAllChecks)
 
       - name: Append Code Checks Output to Summary
@@ -80,7 +80,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Infineon/makers-devops
-          path: extras/makers-devops
+          path: makers-devops
 
       # - name: Set execute permissions for all .sh files in a folder 
         # run: |
@@ -92,8 +92,8 @@ jobs:
           echo "Workflow has these parameters :"
           echo "matrix.checks   : ${{ matrix.checks }}"
           echo ""
-          # python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}  > output.log
-          extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}  > output.log
+          python3 makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}  > output.log
+          # makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}  > output.log
 
       - name: Archive code check reports
         uses: actions/upload-artifact@v4
