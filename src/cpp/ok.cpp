@@ -1,6 +1,6 @@
-#include <cstdio>
+#include <iostream>
 
 int main(int argc, const char *argv[]) {
-  (void) printf("argc = %d   argv = %s\n", argc, argv);
+  std::cout << "argc = " << argc << "   argv = " << argv << std::endl;
   return (0);
 }
