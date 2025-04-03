@@ -21,4 +21,4 @@ chown -R --reference=tests exampleFlow/results/cppcheck/*
 echo "$0 done."
 
 #exit $ret
-exit 0
+exit 1

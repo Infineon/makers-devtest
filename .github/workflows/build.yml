@@ -68,6 +68,9 @@ jobs:
       matrix:
         checks: ${{ fromJson(needs.setup.outputs.checks) }}
 
+      fail-fast: false
+
+
     steps:
 
     - name: Checkout actions
@@ -79,7 +82,7 @@ jobs:
         
     - name: Demo to show use of script to use matrix values
       id: run_build
-      if: success() || failure()
+#      if: success() || failure()
       run: |
         echo "Workflow has these parameters :"
         echo "matrix.checks   : " ${{ matrix.checks }}
