@@ -64,11 +64,11 @@ jobs:
       options: --cpus 1
 
     strategy:
+      fail-fast: false
 
       matrix:
         checks: ${{ fromJson(needs.setup.outputs.checks) }}
 
-      fail-fast: false
 
 
     steps:
