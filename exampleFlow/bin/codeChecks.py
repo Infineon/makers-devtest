@@ -63,7 +63,7 @@ if __name__ == "__main__":
                 if checkType == 'build':
                     with open(f"{resultPath}/{check}.log", "w") as logfile:
                         returnCodeLocal |= subprocess.run(["make", "run-build-target", f"FQBN={projectYAML[checkType][check]['fqbn']}", f"TARGET={projectYAML[checkType][check]['target']}"], stdout=logfile, stderr=logfile).returncode
-
+                        print(f"returnCodeLocal : {returnCodeLocal}")
                 elif checkType == 'check':
                     if 'command' not in projectYAML[checkType][check]:
                         print(f"ERROR : 'command' not found in project YAML for {checkType} / {check} !")
@@ -71,6 +71,7 @@ if __name__ == "__main__":
 
                     with open(f"{resultPath}/{check}.log", "w") as logfile:
                         returnCodeLocal |= subprocess.run(projectYAML[checkType][check]['command'].split(), stdout=logfile, stderr=logfile).returncode
+                        print(f"returnCodeLocal : {returnCodeLocal}")
 
 
                 if args.showLog:
@@ -80,7 +81,7 @@ if __name__ == "__main__":
                 if returnCodeLocal != 0:
                     print(f"ERROR : Running check '{check}' failed !")
 
-        # returnCode |= returnCodeLocal
+        returnCode |= returnCodeLocal
 
 
     elif args.runCheck:
@@ -117,7 +118,7 @@ if __name__ == "__main__":
         if returnCodeLocal != 0:
             print(f"ERROR : Running check '{check}' failed !")
 
-        # returnCode |= returnCodeLocal
+        returnCode |= returnCodeLocal
 
 
     elif args.getAllChecks:
@@ -145,5 +146,5 @@ if __name__ == "__main__":
         print(f"\nERROR : Wrong parameters passed !\n")
         returnCode = 1
 
-    exit(1)
-    # exit(returnCode)
+    # exit(1)
+    exit(returnCode)
