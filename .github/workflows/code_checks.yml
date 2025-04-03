@@ -46,6 +46,7 @@ jobs:
           ls -alR
           which python3
           ls -al makers-devops/tools/code_checks/codeChecks.py
+          python3 makers-devops/tools/code_checks/codeChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --getAllChecks
           eval $(python3 makers-devops/tools/code_checks/codeChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --getAllChecks)
         #   eval $(python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --getAllChecks)
 
