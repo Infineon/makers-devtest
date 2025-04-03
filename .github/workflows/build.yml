@@ -52,13 +52,13 @@ jobs:
     needs: setup
 
     container:
-      image: docker.io/ifxmakers/makers-docker:push
-      # image: ghcr.io/infineon/makers-docker:latest
-      # credentials:
+      # image: docker.io/ifxmakers/makers-docker:push
+      image: ghcr.io/infineon/makers-docker:latest
+      credentials:
       #   username: ${{ secrets.DOCKERHUB_USERNAME }}
       #   password: ${{ secrets.DOCKERHUB_PASSWORD }}
-        # username: ${{ github.actor }}
-        # password: ${{ secrets.github_token }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
       volumes:
         - .:/myLocalWorkingDir:rw
       options: --cpus 1
@@ -82,7 +82,7 @@ jobs:
         
     - name: Demo to show use of script to use matrix values
       id: run_build
-#      if: success() || failure()
+      # if: success() || failure()
       run: |
         echo "Workflow has these parameters :"
         echo "matrix.checks   : " ${{ matrix.checks }}
