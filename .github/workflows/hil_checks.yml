@@ -80,6 +80,7 @@ jobs:
 
       volumes:
         - .:/myLocalWorkingDir:rw
+        - /opt/hil:/opt/hil:rw
       options: --cpus 1
 
     strategy:
