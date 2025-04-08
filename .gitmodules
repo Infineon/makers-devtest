@@ -4,3 +4,6 @@
 [submodule "extras/arduino-core-tests"]
 	path = extras/arduino-core-tests
 	url = https://github.com/Infineon/arduino-core-tests.git
+[submodule "extras/arduino-xensiv-3d-magnetic-sensor-tlx493d"]
+	path = extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
+	url = https://github.com/Infineon/arduino-xensiv-3d-magnetic-sensor-tlx493d.git
