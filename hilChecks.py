@@ -103,9 +103,9 @@ if __name__ == "__main__":
     returnCode = 0
     args = parseArgs()
      
-    # (projectYAML, userYAML) = readProjectYAML(
-    #     os.getcwd() + "/" + args.projectYAML, os.getcwd() + "/" + args.userYAML
-    # )
+    (projectYAML, userYAML) = readProjectYAML(
+        os.getcwd() + "/" + args.projectYAML, os.getcwd() + "/" + args.userYAML
+    )
 
     if args.runAllChecks:
         for checkType, checkTypeList in userYAML.items():
