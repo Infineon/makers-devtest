@@ -39,17 +39,16 @@ jobs:
         with:
           submodules: false
 
-      # - name: Checkout makers-devops
-      #   uses: actions/checkout@v4
-      #   with:
-      #     repository: Infineon/makers-devops
-      #     path: extras/makers-devops
+      - name: Checkout makers-devops
+        uses: actions/checkout@v4
+        with:
+          repository: Infineon/makers-devops
+          path: extras/makers-devops
 
       - name: Set strategy matrix
         id: set-matrix
         run: |
           eval $(python3 hilChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --getAllChecks)
-
           # eval $(python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --getAllChecks)
 
       - name: Append HIL Checks Output to Summary
