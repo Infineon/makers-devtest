@@ -8,17 +8,17 @@ import subprocess
 import sys
 
 importPath = os.path.normpath(
-    os.path.dirname(os.path.realpath(os.path.abspath(__file__))) + "/.."
+    os.path.dirname(os.path.realpath(os.path.abspath(__file__))) # + "/.."
 )
 
 if not importPath in sys.path:
-    sys.path.insert(1, importPath)
+    sys.path.insert(1, importPath + "/..")
 
 
 # tools_path = os.path.dirname(os.path.abspath(__file__))
 # sys.path.insert(1, tools_path + "/..")
 
-sys.path.insert(1, importPath + "/extras/makers-devops/tools")
+sys.path.insert(0, importPath + "/extras/makers-devops/tools")
 
 
 from project_yaml.readProjectYAML import readProjectYAML
