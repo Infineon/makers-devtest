@@ -70,17 +70,17 @@ jobs:
       - Linux
     needs: setup
 
-    # container:
-    #   image: docker.io/ifxmakers/makers-docker:latest
+    container:
+      # image: docker.io/ifxmakers/makers-docker:latest
 
-      # image: ghcr.io/infineon/makers-docker:push # latest
-      # credentials:
-      #   username: ${{ github.actor }}
-      #   password: ${{ secrets.github_token }}
+      image: ghcr.io/infineon/makers-docker:push # latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
 
-      # volumes:
-      #   - .:/myLocalWorkingDir:rw
-      # options: --cpus 1
+      volumes:
+        - .:/myLocalWorkingDir:rw
+      options: --cpus 1
 
     strategy:
       fail-fast: false
@@ -113,7 +113,10 @@ jobs:
           # rm -rf ~/.arduino15/packages/Infineon/hardware/xmc/*
           # ln -s $GITHUB_WORKSPACE ~/.arduino15/packages/Infineon/hardware/xmc/$TEST_VERSION
 
-          python3 /opt/hil/src/python/hil/runQuery.py -s 2>&1 | tee output.log 
+          cd extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
+          make -f Makefile.arduino.mk FQBN=Infineon:xmc:XMC1100_XMC2GO PORT=/dev/ttyACM2 UNITY_PATH=../arduino-core-tests/Unity iic compile upload
+
+          # python3 /opt/hil/src/python/hil/runQuery.py -s 2>&1 | tee output.log 
           # python3 hilChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }}
           # # python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}
           # > output.log
