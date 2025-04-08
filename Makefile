@@ -19,7 +19,8 @@ clean-results:
 ##############################################################################################################################################################
 
 run-build-target:
-	(cd extras/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET))
+	(cd extras/arduino-xensiv-3d-magnetic-sensor-tlx493d ; make -f Makefile.arduino.mk FQBN=$(FQBN) UNITY_PATH=../arduino-core-tests/Unity $(TARGET))
+	# (cd extras/arduino-core-tests ; make FQBN=$(FQBN) UNITY_PATH=Unity $(TARGET))
 
 
 ##############################################################################################################################################################

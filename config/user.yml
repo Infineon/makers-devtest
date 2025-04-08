@@ -3,4 +3,5 @@ check:
     - check-cppcheck
 
 build:
-    - build-wire-XMC4700    
+    - build-arduino-wire-XMC4700
+    - build-magnetic-w2b6
