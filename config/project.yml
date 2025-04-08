@@ -12,7 +12,7 @@ build:
 
     build-magnetic-w2b6:
       description: Compiling W2B6 unit test for XMC11002Go platform
-      target: iic
+      target: iic upload
       fqbn: Infineon:xmc:XMC1100_XMC2GO
 
 
