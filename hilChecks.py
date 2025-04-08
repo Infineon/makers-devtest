@@ -92,7 +92,8 @@ if __name__ == "__main__":
     returnCode = 0
     args = parseArgs()
 
-    print(f"\n\nsys.path : {sys.path}\n\n")
+    print("\n\nsys.path : ")
+    print(sys.path)
 
     exit(0)
      
