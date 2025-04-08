@@ -107,7 +107,7 @@ jobs:
           # mkdir -p $TMPDIR
 
           # rm -rf $HOME/artefact
-          # mkdir -p $HOME/artefact
+          # mkdir -p $HOME/artefact 
 
           # cd $HOME
           # rm -rf ~/.arduino15/packages/Infineon/hardware/xmc/*
