@@ -9,6 +9,7 @@ import sys
 
 tools_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, tools_path + "/..")
+sys.path.insert(1, tools_path + "/extras/makers-devops/tools")
 
 from project_yaml.readProjectYAML import readProjectYAML
 
