@@ -8,8 +8,8 @@ import subprocess
 import sys
 
 tools_path = os.path.dirname(os.path.abspath(__file__))
-# sys.path.insert(1, tools_path + "/..")
-# sys.path.insert(1, tools_path + "/extras/makers-devops/tools")
+sys.path.insert(1, tools_path + "/..")
+sys.path.insert(1, tools_path + "/extras/makers-devops/tools")
 
 #from project_yaml.readProjectYAML import readProjectYAML
 
@@ -89,9 +89,7 @@ def runCheck(projectYAML, checkType=None, check=None):
 
 
 if __name__ == "__main__":
-    print("Whatever is happening here ??")
-    # print("\n\nsys.path : ")
-    # print(sys.path)
+    print(f"\n\nsys.path : {sys.path}\n\n")
 
     exit(0)
 
