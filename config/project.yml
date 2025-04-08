@@ -5,10 +5,10 @@ build:
       target: test_wire_connected1_pingpong
       fqbn: Infineon:xmc:XMC4700_Relax_Kit
 
-    build-wire-XMC1100:
-      description: Compiling test_wire_connected2_masterpingpong.cpp for XMC1100 platform
-      target: test_wire_connected2_masterpingpong
-      fqbn: Infineon:xmc:XMC1100_Boot_Kit
+    # build-wire-XMC1100:
+    #   description: Compiling test_wire_connected2_masterpingpong.cpp for XMC1100 platform
+    #   target: test_wire_connected2_masterpingpong
+    #   fqbn: Infineon:xmc:XMC1100_Boot_Kit
 
 
 

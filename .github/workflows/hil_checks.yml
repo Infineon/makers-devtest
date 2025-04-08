@@ -65,20 +65,19 @@ jobs:
       - self-hosted
       - X64
       - Linux
-      # - ubuntu-24.04
     needs: setup
 
-    # container:
+    container:
     #   image: docker.io/ifxmakers/makers-docker:latest
 
-    #   # image: ghcr.io/infineon/makers-docker:latest
-    #   # credentials:
-    #     # username: ${{ github.actor }}
-    #     # password: ${{ secrets.github_token }}
+      image: ghcr.io/infineon/makers-docker:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
 
-    #   volumes:
-    #     - .:/myLocalWorkingDir:rw
-    #   options: --cpus 1
+      volumes:
+        - .:/myLocalWorkingDir:rw
+      options: --cpus 1
 
     strategy:
       fail-fast: false
@@ -102,12 +101,12 @@ jobs:
           # python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}
           # > output.log
 
-      # - name: Archive code check reports
-      #   if: success() || failure()
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: ${{ matrix.checks }}
-      #     path: _results
+      - name: Archive code check reports
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.checks }}
+          path: _results
 
       # - name: Append Code Checks Output to Summary
       #   if: success() || failure()

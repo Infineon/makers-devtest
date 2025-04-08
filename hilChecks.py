@@ -12,7 +12,7 @@ importPath = os.path.normpath(
 )
 
 if not importPath in sys.path:
-    sys.path.insert(1, importPath + "/..")
+    sys.path.insert(0, importPath + "/..")
 
 
 # tools_path = os.path.dirname(os.path.abspath(__file__))
