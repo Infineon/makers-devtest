@@ -7,11 +7,21 @@ import os
 import subprocess
 import sys
 
-tools_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, tools_path + "/..")
-sys.path.insert(1, tools_path + "/extras/makers-devops/tools")
+importPath = os.path.normpath(
+    os.path.dirname(os.path.realpath(os.path.abspath(__file__))) + "/.."
+)
 
-#from project_yaml.readProjectYAML import readProjectYAML
+if not importPath in sys.path:
+    sys.path.insert(1, importPath)
+
+
+# tools_path = os.path.dirname(os.path.abspath(__file__))
+# sys.path.insert(1, tools_path + "/..")
+
+sys.path.insert(1, importPath + "/extras/makers-devops/tools")
+
+
+from project_yaml.readProjectYAML import readProjectYAML
 
 
 def parseArgs():
@@ -89,9 +99,6 @@ def runCheck(projectYAML, checkType=None, check=None):
 
 
 if __name__ == "__main__":
-    print(f"\n\nsys.path : {sys.path}\n\n")
-
-    exit(0)
 
     returnCode = 0
     args = parseArgs()
