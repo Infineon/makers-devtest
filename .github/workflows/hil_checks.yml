@@ -17,8 +17,8 @@ defaults:
   run:
     shell: bash
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
     
 jobs:
   setup:
@@ -102,10 +102,16 @@ jobs:
           echo ""
           ls -al
           echo ""
+
           export TMPDIR=$HOME/tmp
           mkdir -p $TMPDIR
+
           rm -rf $HOME/artefact
           mkdir -p $HOME/artefact
+
+          # cd $HOME
+          # rm -rf ~/.arduino15/packages/Infineon/hardware/xmc/*
+          # ln -s $GITHUB_WORKSPACE ~/.arduino15/packages/Infineon/hardware/xmc/$TEST_VERSION
 
           python3 /opt/hil/src/python/hil/runQuery.py -s 2>&1 | tee output.log 
           # python3 hilChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }}
