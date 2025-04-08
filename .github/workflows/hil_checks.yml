@@ -99,7 +99,7 @@ jobs:
           echo ""
           ls -al
           echo ""
-          python3 /opt/hil/src/python/hil/runQuery.py -s 2>&1 | tee output.log
+          python3 /opt/hil/src/python/hil/runQuery.py -s 2>&1 | tee output.log 
           # python3 hilChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }}
           # # python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}
           # > output.log
