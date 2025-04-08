@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# python3 codeChecks.py
+# python3 hilChecks.py
 
 import argparse
 import os
@@ -8,8 +8,8 @@ import subprocess
 import sys
 
 tools_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, tools_path + "/..")
-sys.path.insert(1, tools_path + "/extras/makers-devops/tools")
+# sys.path.insert(1, tools_path + "/..")
+# sys.path.insert(1, tools_path + "/extras/makers-devops/tools")
 
 #from project_yaml.readProjectYAML import readProjectYAML
 
@@ -89,13 +89,13 @@ def runCheck(projectYAML, checkType=None, check=None):
 
 
 if __name__ == "__main__":
-    returnCode = 0
-    args = parseArgs()
-
     print("\n\nsys.path : ")
     print(sys.path)
 
     exit(0)
+
+    returnCode = 0
+    args = parseArgs()
      
     # (projectYAML, userYAML) = readProjectYAML(
     #     os.getcwd() + "/" + args.projectYAML, os.getcwd() + "/" + args.userYAML
