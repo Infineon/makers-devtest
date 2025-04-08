@@ -92,6 +92,8 @@ if __name__ == "__main__":
     returnCode = 0
     args = parseArgs()
 
+    print(f"\n\nsys.path : {sys.path}\n\n")
+
     (projectYAML, userYAML) = readProjectYAML(
         os.getcwd() + "/" + args.projectYAML, os.getcwd() + "/" + args.userYAML
     )
