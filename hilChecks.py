@@ -89,7 +89,8 @@ def runCheck(projectYAML, checkType=None, check=None):
 
 
 if __name__ == "__main__":
-    print("\n\nsys.path : ")
+    print("Whatever is happening here ??")
+    # print("\n\nsys.path : ")
     # print(sys.path)
 
     exit(0)
