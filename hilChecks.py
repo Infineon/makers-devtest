@@ -11,7 +11,7 @@ tools_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, tools_path + "/..")
 sys.path.insert(1, tools_path + "/extras/makers-devops/tools")
 
-from project_yaml.readProjectYAML import readProjectYAML
+#from project_yaml.readProjectYAML import readProjectYAML
 
 
 def parseArgs():
@@ -94,9 +94,11 @@ if __name__ == "__main__":
 
     print(f"\n\nsys.path : {sys.path}\n\n")
 
-    (projectYAML, userYAML) = readProjectYAML(
-        os.getcwd() + "/" + args.projectYAML, os.getcwd() + "/" + args.userYAML
-    )
+    exit(0)
+     
+    # (projectYAML, userYAML) = readProjectYAML(
+    #     os.getcwd() + "/" + args.projectYAML, os.getcwd() + "/" + args.userYAML
+    # )
 
     if args.runAllChecks:
         for checkType, checkTypeList in userYAML.items():
