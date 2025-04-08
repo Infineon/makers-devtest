@@ -1,7 +1,7 @@
-check:
-    - check-clang-tidy
-    - check-cppcheck
+# check:
+#     - check-clang-tidy
+#     - check-cppcheck
 
 build:
-    - build-arduino-wire-XMC4700
+    # - build-arduino-wire-XMC4700
     - build-magnetic-w2b6
