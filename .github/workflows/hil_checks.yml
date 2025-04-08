@@ -24,7 +24,7 @@ jobs:
     container:
       # image: docker.io/ifxmakers/makers-docker:latest
 
-      image: ghcr.io/infineon/makers-docker:latest
+      image: ghcr.io/infineon/makers-docker:push #latest
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.github_token }}
@@ -67,17 +67,17 @@ jobs:
       - Linux
     needs: setup
 
-    container:
+    # container:
     #   image: docker.io/ifxmakers/makers-docker:latest
 
-      image: ghcr.io/infineon/makers-docker:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.github_token }}
+      # image: ghcr.io/infineon/makers-docker:push # latest
+      # credentials:
+      #   username: ${{ github.actor }}
+      #   password: ${{ secrets.github_token }}
 
-      volumes:
-        - .:/myLocalWorkingDir:rw
-      options: --cpus 1
+      # volumes:
+      #   - .:/myLocalWorkingDir:rw
+      # options: --cpus 1
 
     strategy:
       fail-fast: false
@@ -97,7 +97,9 @@ jobs:
           echo "Workflow has these parameters :"
           echo "matrix.checks   : ${{ matrix.checks }}"
           echo ""
-          python3 /home/des-epe-team/jensb/src/python/hil/runQuery.py -s | tee output.log
+          ls -al
+          echo ""
+          python3 /opt/hil/src/python/hil/runQuery.py -s | tee output.log
           # python3 hilChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }}
           # # python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}
           # > output.log
