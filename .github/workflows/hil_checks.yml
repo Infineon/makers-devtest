@@ -84,10 +84,9 @@ jobs:
 #        -w /myLocalWorkingDir --device=/dev/ttyACM0 --device=/dev/ttyACM1 --device=/dev/ttyACM2
 
       options:
-        --devices /dev/ttyACM0
-        --devices /dev/ttyACM1
-
-      # options: --cpus 1
+        --cpus 1
+        --device /dev/ttyACM0
+        --device /dev/ttyACM1
 
     strategy:
       fail-fast: false
@@ -123,7 +122,7 @@ jobs:
           # cd extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
           # make -f Makefile.arduino.mk FQBN=Infineon:xmc:XMC1100_XMC2GO PORT=/dev/ttyACM2 UNITY_PATH=../arduino-core-tests/Unity iic compile upload
 
-          python3 /opt/hil/src/python/hil/runQuery.py -s 2>&1 | tee output.log 
+          python3 /opt/hil/src/python/hil/runQuery.py -u 2>&1 | tee output.log 
           # python3 hilChecks.py --projectYAML "config/project.yml" --userYAML "config/user.yml" --runCheck ${{ matrix.checks }}
           # # python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML "${{ inputs.project-yaml }}" --userYAML "${{ inputs.user-yaml }}" --runCheck ${{ matrix.checks }}
           # > output.log
