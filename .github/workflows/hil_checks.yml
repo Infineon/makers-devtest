@@ -83,10 +83,11 @@ jobs:
         - /opt/hil:/opt/hil:rw
 #        -w /myLocalWorkingDir --device=/dev/ttyACM0 --device=/dev/ttyACM1 --device=/dev/ttyACM2
 
-      devices:
-        - /dev/ttyACM0: /dev/ttyACM0
+      options:
+        --devices /dev/ttyACM0
+        --devices /dev/ttyACM1
 
-      options: --cpus 1
+      # options: --cpus 1
 
     strategy:
       fail-fast: false
