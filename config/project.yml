@@ -14,6 +14,7 @@ build:
       description: Compiling W2B6 unit test for XMC11002Go platform
       target: iic upload
       fqbn: Infineon:xmc:XMC1100_XMC2GO
+      working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
 
 
 # check:
@@ -37,3 +38,11 @@ check:
       description: cppcheck check sources
       tool: cppcheck
       command: extras/makers-devops/tools/code_checks/run_cppcheck.sh --no-suppress-default src/c/* src/cpp  
+
+
+hil:
+    hil-magnetic-w2b6-xmc100_xmc2go:
+      - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform
+        target: iic upload monitor
+        query: type == 'Infineon:xmc:XMC1100_XMC2GO'
+        working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
