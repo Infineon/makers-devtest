@@ -14,7 +14,7 @@ build:
       description: Compiling W2B6 unit test for XMC11002Go platform
       target: iic upload
       fqbn: Infineon:xmc:XMC1100_XMC2GO
-      # working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
+    # working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
 
 
 # check:
