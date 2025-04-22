@@ -1,6 +1,7 @@
 [submodule "extras/makers-devops"]
 	path = extras/makers-devops
 	url = https://github.com/Infineon/makers-devops.git
+	branch=main
 [submodule "extras/arduino-core-tests"]
 	path = extras/arduino-core-tests
 	url = https://github.com/Infineon/arduino-core-tests.git
