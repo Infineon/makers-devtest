@@ -39,19 +39,26 @@ run-build-all:
 	cd tests/arduino-core-tests ; make FQBN=Infineon:xmc:XMC4700_Relax_Kit UNITY_PATH=Unity test_wire_connected2_masterpingpong
 
 
-run-build-command: pull-container
-	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck build-magnetic-w2b6
-	# # $(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck build-magnetic-w2b6
-	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck check-clang-tidy
-	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck example-magnetic-w2b6-xmc100_xmc2go
-	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck monitor-magnetic-w2b6-xmc100_xmc2go
+run-build-command-extras: pull-container
+	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck build-magnetic-w2b6
+	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck check-clang-tidy
+	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck example-magnetic-w2b6-xmc100_xmc2go
+	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck monitor-magnetic-w2b6-xmc100_xmc2go
+
+
+# run-build-command-tools: pull-container
+# 	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck build-magnetic-w2b6
+# 	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck check-clang-tidy
+# 	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck example-magnetic-w2b6-xmc100_xmc2go
+# 	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck monitor-magnetic-w2b6-xmc100_xmc2go
 
 
 ##############################################################################################################################################################
 
 
 #TAG=push
-TAG=latest
+# TAG=latest
+TAG=test
 
 DOCKER_REGISTRY=dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:$(TAG)
 GHCR_REGISTRY=ghcr.io/infineon/makers-docker:$(TAG)
