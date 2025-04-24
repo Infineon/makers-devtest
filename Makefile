@@ -39,10 +39,18 @@ run-build-all:
 	cd tests/arduino-core-tests ; make FQBN=Infineon:xmc:XMC4700_Relax_Kit UNITY_PATH=Unity test_wire_connected2_masterpingpong
 
 
+run-build-command: pull-container
+	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck build-magnetic-w2b6
+	# # $(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck build-magnetic-w2b6
+	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck check-clang-tidy
+	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck example-magnetic-w2b6-xmc100_xmc2go
+	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck monitor-magnetic-w2b6-xmc100_xmc2go
+
+
 ##############################################################################################################################################################
 
 
-TAG=push
+#TAG=push
 TAG=latest
 
 DOCKER_REGISTRY=dockerregistry-v2.vih.infineon.com/ifxmakers/makers-docker:$(TAG)
@@ -54,6 +62,11 @@ REGISTRY=$(DOCKER_REGISTRY)
 DOCKER=docker run --rm -it -v $(PWD):/myLocalWorkingDir:rw $(REGISTRY)
 #DOCKER=
 
+# Lab-PC :
+# docker run --rm -it -v .:/myLocalWorkingDir:rw -v /opt:/opt:rw -w /myLocalWorkingDir --device=/dev/ttyACM0 --device=/dev/ttyACM1 --device=/dev/ttyACM2 ifxmakers/makers-docker:push
+
+# wsl
+# docker run --rm -it -v .:/myLocalWorkingDir:rw -v /opt:/opt:rw -w /myLocalWorkingDir ifxmakers/makers-docker:push
 
 ### Setting DOCKER variable to empty string => containers not used
 ### Setting DOCKER variable to "docker run ..." => containers used
