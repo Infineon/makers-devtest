@@ -1,16 +1,17 @@
-build:
+compile:
+#build:
     # - build-arduino-wire-XMC4700
     - build-magnetic-w2b6
 
 
-check:
+code-quality:
     - check-clang-tidy
 #     - check-cppcheck
 
 
-example:
-    - example-magnetic-w2b6-xmc100_xmc2go
+example-test:
+    - example-test-magnetic-w2b6-xmc100_xmc2go
 
 
-monitor:
-    - monitor-magnetic-w2b6-xmc100_xmc2go
+unit-test:
+    - unit-test-magnetic-w2b6-xmc100_xmc2go

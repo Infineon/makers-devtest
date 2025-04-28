@@ -1,5 +1,5 @@
 
-build:
+compile:
     # build-arduino-wire-XMC4700:
     #   description: Compiling test_wire_connected1_pingpong.cpp for XMC4700 platform
     #   target: test_wire_connected1_pingpong
@@ -10,46 +10,46 @@ build:
     #   target: test_wire_connected2_masterpingpong
     #   fqbn: Infineon:xmc:XMC1100_Boot_Kit
 
-    build-magnetic-w2b6:
+    compile-magnetic-w2b6:
       description: Compiling W2B6 unit test for XMC11002Go platform
       command: make -f Makefile.arduino.mk FQBN=Infineon:xmc:XMC1100_XMC2GO iic compile
       # fqbn: Infineon:xmc:XMC1100_XMC2GO
       working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
 
 
-# check:
-#     check-clang-tidy:
+# code-quality:
+#     code-quality-clang-tidy:
 #       description: clang-tidy check for wire sources
 #       tool: clang-tidy
 #       command: ./run_clang_tidy.sh --config-file=config/clang-tidy/.clang-tidy -i src/excludes src/c src/cpp
 
-#     check-cppcheck:
+#     code-quality-cppcheck:
 #       description: cppcheck check for wire sources
 #       tool: cppcheck
 #       command: ./run_cppcheck.sh --no-suppress-default src/c/* src/cpp
 
-check:
-    check-clang-tidy:
+code-quality:
+    code-quality-clang-tidy:
       description: clang-tidy check sources
       tool: clang-tidy 
       command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh -i src/excludes src/cpp/ok.cpp
 
-    check-cppcheck:
+    code-quality-cppcheck:
       description: cppcheck check sources
       tool: cppcheck
       command: extras/makers-devops/tools/code_checks/run_cppcheck.sh --no-suppress-default src/c/* src/cpp  
 
 
-example:
-    example-magnetic-w2b6-xmc100_xmc2go:
+example-test:
+    example-test--magnetic-w2b6-xmc100_xmc2go:
       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
         command: make -f Makefile.arduino.mk FQBN=Infineon:xmc:XMC1100_XMC2GO iic compile upload
         query: tlx493d_w2b6 > 0 and type.str.startswith('xmc1100')
         working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
 
 
-monitor:
-    monitor-magnetic-w2b6-xmc100_xmc2go:
+unit-test:
+    unit-test-magnetic-w2b6-xmc100_xmc2go:
       - description: Compiling, flashing and monitoring W2B6 unit test for XMC11002Go platform.
         command: make -f Makefile.arduino.mk FQBN=Infineon:xmc:XMC1100_XMC2GO iic compile upload
         query: description.str.contains('DPS310') and type.str.startswith('xmc1100')
