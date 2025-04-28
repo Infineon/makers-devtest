@@ -1,12 +1,11 @@
 compile:
-#build:
-    # - build-arduino-wire-XMC4700
-    - build-magnetic-w2b6
+    # - compile-arduino-wire-XMC4700
+    - compile-magnetic-w2b6
 
 
 code-quality:
-    - check-clang-tidy
-#     - check-cppcheck
+    - code-quality-clang-tidy
+#     - code-quality-cppcheck
 
 
 example-test:

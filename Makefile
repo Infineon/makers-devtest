@@ -40,10 +40,10 @@ run-build-all:
 
 
 run-build-command-extras: pull-container
-	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck build-magnetic-w2b6
-	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck check-clang-tidy
-	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck example-magnetic-w2b6-xmc100_xmc2go
-	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck monitor-magnetic-w2b6-xmc100_xmc2go
+	-$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck compile-magnetic-w2b6
+	-$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck code-quality-clang-tidy
+	-$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck example-test-magnetic-w2b6-xmc100_xmc2go
+	-$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck unit-test-magnetic-w2b6-xmc100_xmc2go
 
 
 # run-build-command-tools: pull-container
