@@ -5,7 +5,7 @@ compile:
 
 code-quality:
     - code-quality-clang-tidy
-#     - code-quality-cppcheck
+    - code-quality-cppcheck
 
 
 example-test:
