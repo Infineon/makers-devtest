@@ -223,7 +223,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
     <div id="menu">
      <p><a href="index.html">Defects:</a> ok.c</p>
-<a href="4.html#line-3"> misra-c2012-8.6 3</a>
+<a href="4.html#line-3"> misra-c2012-8.6 3</a><a href="4.html#line-4"> misra-c2012-21.6 4</a>
     </div>
     <div id="content">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
@@ -233,16 +233,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="normal">5</span>
 <span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><a id="line-1" name="line-1"></a>
 <a id="line-2" name="line-2"></a>
-<a id="line-3" name="line-3"></a><span class="hll"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="error2">&lt;--- misra violation (rule-texts-file not found: config/cppcheck/misra.txt)</span>
-</span><a id="line-4" name="line-4"></a><span class="w">  </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;argc = %d   argv = %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
-<a id="line-5" name="line-5"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<a id="line-3" name="line-3"></a><span class="hll"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="error2">&lt;--- misra violation (rule-texts-file not found: extras/makers-devops/configs/cppcheck/misra.txt)</span>
+</span><a id="line-4" name="line-4"></a><span class="hll"><span class="w">  </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;argc = %d   argv = %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span><span class="error2">&lt;--- misra violation (rule-texts-file not found: extras/makers-devops/configs/cppcheck/misra.txt)</span>
+</span><a id="line-5" name="line-5"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <a id="line-6" name="line-6"></a><span class="p">}</span>
 </pre></div></td></tr></table></div>
 
     </div>
     <div id="footer" class="footer">
       <p>
-        Created by Cppcheck 2.17 dev (<a href="https://cppcheck.sourceforge.io">Sourceforge</a>, <a href="irc://irc.freenode.net/cppcheck">IRC</a>)
+        Created by Cppcheck 2.18 dev (<a href="https://cppcheck.sourceforge.io">Sourceforge</a>, <a href="irc://irc.freenode.net/cppcheck">IRC</a>)
       </p>
     </div>
     </div>
