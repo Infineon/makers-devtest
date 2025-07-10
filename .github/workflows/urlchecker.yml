@@ -22,17 +22,19 @@ jobs:
         print_all: true
 
         # The timeout seconds to provide to requests, defaults to 5 seconds
-        timeout: 10
+        timeout: 5
         verbose: true
 
         # How many times to retry a failed request (each is logged, defaults to 1)
-        retry_count: 5
+        retry_count: 3
 
         # A comma separated links to exclude during URL checks
-        exclude_urls: https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/
+        exclude_urls: https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software
+        # exclude_urls: https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software,https://www.infineon.com/cms/en/design-support/documentation
 
         # A comma separated patterns to exclude during URL checks
-        exclude_patterns: https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/
+        exclude_patterns: https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software
+        # exclude_patterns: https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software,https://www.infineon.com/cms/en/design-support/documentation
 
         # choose if the force pass or not
         force_pass : false

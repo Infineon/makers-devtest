@@ -2,7 +2,7 @@ name: Code Checks
 
 on:
   pull_request:
-  push:
+  # push:
     
 jobs:
   makers-devops:

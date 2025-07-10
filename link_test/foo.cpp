@@ -10,8 +10,8 @@
 #include <dummy.h>
 #include <dummy2.h>
 
-// https ://www.infineon.com/cms/en/design-support/documentation
-// https ://www.infineon.com/cms/en/design-support/documentatio
+// https://www.infineon.com/cms/en/design-support/documentation
+// https://www.infineon.com/cms/en/design-support/documentatio
 void hello(
     int aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
     double
@@ -19,7 +19,7 @@ void hello(
   //    return 4;
 }
 
-// https://www.infineon.com/cms/en/design-support/documentation
+// https://www.infineon.co/cms/en/design-support/documentation
 int hello2(
     int aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
     double
@@ -34,7 +34,7 @@ int hello2(
 int deadFunction() {}
 
 /*
-https://www.infineon.com/cms/en/design-support/documentation
+htts://www.infineon.com/cms/en/design-support/documentation
  */
 /*
 https ://www.infineon.com/cms/en/design-support/documentation
