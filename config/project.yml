@@ -1,3 +1,10 @@
+# options:
+#   USE_CORE:
+#     name: local
+#     url: blabla
+#   # INCLUDE:
+#   #   - filename
+
 
 compile:
     # build-arduino-wire-XMC4700:
@@ -13,7 +20,9 @@ compile:
     compile-magnetic-w2b6:
       description: Compiling W2B6 unit test for XMC11002Go platform
       command: make -f Makefile.arduino.mk FQBN=Infineon:xmc:XMC1100_XMC2GO iic compile
-      # fqbn: Infineon:xmc:XMC1100_XMC2GO
+      fqbns:
+        - Infineon:xmc:XMC1100_XMC2GO
+        - Infineon:xmc:XMC1100_Boot_Kit
       working_dir: extras/arduino-xensiv-3d-magnetic-sensor-tlx493d
 
 
@@ -31,13 +40,22 @@ compile:
 code-quality:
     code-quality-clang-tidy:
       description: clang-tidy check sources
-      tool: clang-tidy 
-      command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh -i src/excludes src/cpp/ok.cpp
+      tool: clang-tidy
+      # command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh -I src/excludes src/cpp/foo.cpp
+      # command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh -I src/excludes --exclude-header-filter '*src/excludes*' src/cpp/foo.cpp
+      # command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh -I src/excludes -i src/excludes src/cpp/dummy3.h
+      # command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh -I src/excludes -i src/excludes src/cpp/*.[ch]*
+
+      command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh src/cpp/!(c)
+      # command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh src/cpp/!(excludes)
+      # command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh src/cpp/!(excludes|c)
+
+      # command: extras/makers-devops/tools/code_checks/run_clang_tidy.sh -i src/excludes src/cpp/ok.cpp
 
     code-quality-cppcheck:
       description: cppcheck check sources
       tool: cppcheck
-      command: extras/makers-devops/tools/code_checks/run_cppcheck.sh --no-suppress-default src/c/* src/cpp  
+      command: extras/makers-devops/tools/code_checks/run_cppcheck.sh --no-suppress-default src/c/* src/cpp
 
 
 example-test:

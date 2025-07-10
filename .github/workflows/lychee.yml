@@ -1,0 +1,31 @@
+name: Check URLs
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Link Checker
+      uses: lycheeverse/lychee-action@v2
+      with:
+        # Check all markdown, html and reStructuredText files in repo (default)
+        args: --base . --verbose --no-progress 'link_test/*.md' 'link_test/*.html' 'link_test/*.rst' 'link_test/*.c*'  'link_test/*.h*'
+
+        # Use json as output format (instead of markdown)
+        # format: markdown
+        
+        # Use different output file path
+        # output: result_lychee.md
+        
+        # Use a custom GitHub token, which
+        # token: ${{ secrets.GITHUB_TOKEN }}
+        
+        # Don't fail action on broken links
+        fail: false
+        # Run lychee in a different directory.
+        # Note: This changes the lychee output directory as well.
+        # workingDirectory: website/subdir

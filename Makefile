@@ -40,18 +40,25 @@ run-build-all:
 
 
 run-build-command-extras: pull-container
-	-$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck compile-magnetic-w2b6
+	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck compile-magnetic-w2b6
+	# -$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck example-test-magnetic-w2b6-xmc100_xmc2go
+	# -$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck unit-test-magnetic-w2b6-xmc100_xmc2go
 	-$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck code-quality-clang-tidy
-	-$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck example-test-magnetic-w2b6-xmc100_xmc2go
-	-$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck unit-test-magnetic-w2b6-xmc100_xmc2go
+	-$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck code-quality-cppcheck
+	#-$(DOCKER) python3 extras/makers-devops/tools/code_checks/merge_clang_tidy_cppcheck.py --logDir=_results/clang-tidy/code-quality-clang-tidy \
+     #                                                                                      --xmlPath=_results/cppcheck/code-quality-cppcheck/code-quality-cppcheck-errors.xml
+	#-$(DOCKER) cppcheck-htmlreport \
+    #        --file=_results/cppcheck/code-quality-cppcheck/code-quality-cppcheck-errors.xml \
+    #        --title=CPPCheck \
+    #        --report-dir=_results/cppcheck/code-quality-cppcheck/html-report \
+    #        --source-dir=.
 
-
+			
 # run-build-command-tools: pull-container
 # 	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck build-magnetic-w2b6
 # 	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck check-clang-tidy
 # 	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck example-magnetic-w2b6-xmc100_xmc2go
 # 	$(DOCKER) python3 tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck monitor-magnetic-w2b6-xmc100_xmc2go
-
 
 ##############################################################################################################################################################
 
@@ -112,13 +119,13 @@ run-container-cppcheck: clean-results pull-container
 
 
 run-container-clang-tidy: clean-results pull-container
-	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck check-clang-tidy
+	$(DOCKER) python3 extras/makers-devops/tools/code_checks/codeChecks.py --projectYAML config/project.yml --userYAML config/user.yml --runCheck code-quality-clang-tidy
 
 ##############################################################################################################################################################
 
 # check container content
 run-container-bash: pull-container
-	$(DOCKER) 
+	$(DOCKER) bash
 
 
 # run stuff with container from docker hub
