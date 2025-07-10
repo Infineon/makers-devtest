@@ -19,7 +19,7 @@ jobs:
           #   !dist/**/*.{ts,js}
           #
           # Default: ALL files
-          files: 'link_test/*'
+          files: link_test/**/*
 
           # Check files and directories starting with `.`.
           # - "true" - glob searches will match against `.dot` files.
@@ -41,7 +41,7 @@ jobs:
           treat_flagged_words_as_errors: false
 
           # Generate Spelling suggestions.
-          suggestions: false
+          suggestions: true
 
           # Determines if the action should be failed if any spelling issues are found.
           # Allowed values are: true, false
@@ -56,7 +56,7 @@ jobs:
 
           # Log progress and other information during the action execution.
           # Default: false
-          verbose: false
+          verbose: true
 
           # Use the `files` setting found in the CSpell configuration instead of `input.files`.
           use_cspell_files: false
