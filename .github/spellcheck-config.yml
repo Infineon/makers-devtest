@@ -14,7 +14,7 @@ matrix:
       - code
       - pre
   sources:
-  - 'link_check/*.md'
-  - 'link_check/*.cpp'
+  - 'link_test/*.md'
+  - 'link_test/*.cpp'
   
   default_encoding: utf-8
