@@ -23,14 +23,8 @@
 [![Pre-commit used][pre-commit-shield]][pre-commit-url]
 
  https ://www.infineon.com/cms/en/design-support/documentation
- 
+
  https ://www.infineon.com/cms/en/design-support/documentatio
-void hello(
-    int aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
-    double
-        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb) {
-  //    return 4;
-}
 
 // https://www.infineon.com/cms/en/design-support/documentation
 
