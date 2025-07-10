@@ -13,7 +13,7 @@ jobs:
       uses: lycheeverse/lychee-action@v2
       with:
         # Check all markdown, html and reStructuredText files in repo (default)
-        args: --base . --verbose --no-progress 'link_test/*.md' 'link_test/*.html' 'link_test/*.rst' 'link_test/*.c*'  'link_test/*.h*'
+        args: --base . --verbose 'link_test/*.md' 'link_test/*.html' 'link_test/*.rst' 'link_test/*.c*'  'link_test/*.h*'
 
         # Use json as output format (instead of markdown)
         # format: markdown
