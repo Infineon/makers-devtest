@@ -35,6 +35,7 @@ int deadFunction() {}
 
 /*
 htts://www.infineon.com/cms/en/design-support/documentation
+httpsd://www.infineon.com/cms/en/design-support/documentation
  */
 /*
 https ://www.infineon.com/cms/en/design-support/documentation
