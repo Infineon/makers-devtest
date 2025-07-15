@@ -1,8 +1,8 @@
 name: Spellcheck Action
 on: 
   pull_request:
-  push:
-  
+  # push:
+
 jobs:
   build:
     name: Spellcheck

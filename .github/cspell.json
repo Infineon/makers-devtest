@@ -14,7 +14,9 @@
         "pollyjs",
         "repos",
         "shrinkwrap",
-        "streetsidesoftware"
+        "streetsidesoftware",
+        "Infineon",
+        "infineon"
     ],
     "useGitignore": true,
     "ignorePaths": [
