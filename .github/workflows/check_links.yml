@@ -1,4 +1,4 @@
-name: Check Links
+name: Check links
 
 on:
   workflow_dispatch:
@@ -14,15 +14,4 @@ on:
 
 jobs:
   linkChecker:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Link Checker
-        id: lychee
-        uses: lycheeverse/lychee-action@v2
-        with:
-          args: --skip-missing --glob-ignore-case --hidden --no-ignore './**/*.md' './**/*.html' './**/*.rst'
-          fail: true
-          format: markdown
-          jobSummary: true
+    uses: Infineon/makers-devops/.github/workflows/check_links.yml@devops/add-link-checker
