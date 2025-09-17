@@ -21,6 +21,7 @@
 [![MIT License][license-shield]][license-url]
 [![Contributor Covenant][contributor-covenant-shield]][contributor-covenant-url]
 [![Pre-commit used][pre-commit-shield]][pre-commit-url]
+[![Check Links](https://github.com/Infineon/makers-devtest/actions/workflows/check_links.yml/badge.svg)](https://github.com/Infineon/makers-devtest/actions/workflows/check_links.yml)
 
 
 <!-- [![CI](https://img.shields.io/github.com/Infineon/makers-devtest/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Infineon/makers-devtest/actions/workflows/build.yml)
